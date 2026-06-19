@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Sofia Valyanova · CV</title>
+    <!-- Библиотека для автоскачивания PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+        /* ----- СБРОС И БАЗА ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #f5f2eb;
+            color: #2d3e2d;
+            padding: 2rem 1rem;
+            line-height: 1.5;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* ----- ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКА ----- */
+        .lang-switch {
+            position: sticky;
+            top: 1rem;
+            z-index: 10;
+            text-align: right;
+            margin-bottom: 1rem;
+        }
+        .lang-switch button {
+            background: #6b8e6b;
+            border: none;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #f5f2eb;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 12px rgba(80, 100, 80, 0.15);
+        }
+        .lang-switch button:hover {
+            background: #5a7a5a;
+            transform: scale(1.02);
+        }
+
+        /* ----- КАРТОЧКИ С ПЛАВНЫМ ПОЯВЛЕНИЕМ ----- */
+        .card {
+            background: #e8e0d5;
+            padding: 2rem;
+            border-radius: 28px;
+            box-shadow: 0 12px 28px rgba(60, 80, 60, 0.08);
+            margin-bottom: 2rem;
+            transition: opacity 0.7s ease, transform 0.6s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        .card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ----- ТИПОГРАФИКА ----- */
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #2d3e2d;
+        }
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 500;
+            border-bottom: 3px solid #6b8e6b;
+            padding-bottom: 0.4rem;
+            margin-bottom: 1.2rem;
+            color: #2d3e2d;
+        }
+        .subhead {
+            font-size: 1.2rem;
+            color: #4a604a;
+            margin-top: 0.1rem;
+        }
+        .contact-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem 1.2rem;
+            margin: 0.8rem 0 0.2rem;
+        }
+        .contact-grid a,
+        .contact-grid span {
+            background: #d4cdc0;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            text-decoration: none;
+            color: #2d3e2d;
+            font-weight: 500;
+        }
+        .tag {
+            display: inline-block;
+            background: #c4bcae;
+            padding: 0.25rem 1rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            margin: 0.2rem 0.3rem 0.2rem 0;
+        }
+        .flex-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+        }
+        @media (max-width: 700px) {
+            .flex-grid {
+                grid-template-columns: 1fr;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+        }
+
+        .exp-item {
+            background: #f0ece4;
+            padding: 0.8rem 1.2rem;
+            border-radius: 18px;
+            margin-bottom: 0.8rem;
+            border-left: 6px solid #6b8e6b;
+        }
+        .project-item {
+            background: #f0ece4;
+            padding: 0.8rem 1.2rem;
+            border-radius: 18px;
+            margin-bottom: 0.8rem;
+            border-left: 6px solid #a3b8a3;
+        }.btn {
+            display: inline-block;
+            background: #6b8e6b;
+            padding: 0.6rem 1.8rem;
+            border-radius: 60px;
+            font-weight: 600;
+            color: #f5f2eb;
+            text-decoration: none;
+            transition: background 0.2s;
+            margin-top: 0.5rem;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: #5a7a5a;
+        }
+        .highlight {
+            background: #d4cdc0;
+            padding: 0.1rem 0.5rem;
+            border-radius: 16px;
+            font-weight: 500;
+        }
+
+        /* ----- СТИЛИ ДЛЯ ПЕЧАТИ (PDF) ----- */
+        @media print {
+            .lang-switch {
+                display: none;
+            }
+            .card {
+                opacity: 1 !important;
+                transform: none !important;
+                box-shadow: none;
+                break-inside: avoid;
+            }
+            body {
+                background: white;
+                padding: 0.5in;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- ===== ПЕРЕКЛЮЧАТЕЛЬ ===== -->
+    <div class="lang-switch">
+        <button id="langToggle">Russian</button>
+    </div>
+
+    <!-- ===== КОНТЕНТ ===== -->
+    <div id="content">
+
+        <!-- БЛОК 1: ИМЯ + КОНТАКТЫ -->
+        <div class="card visible" data-en="
+            <h1>Sofia Valyanova</h1>
+            <div class='subhead'>BA. Sc in Digital Business &amp; Data Science</div>
+            <div class='contact-grid'>
+                <span>Phone: +971 56 229 1034</span>
+                <a href='mailto:valyanovvva@gmail.com'>valyanovvva@gmail.com</a>
+                <span>Dubai, UAE</span>
+            </div>
+        " data-ru="
+            <h1>София Валянова</h1>
+            <div class='subhead'>Бакалавр цифрового бизнеса и науки о данных</div>
+            <div class='contact-grid'>
+                <span>Телефон: +971 56 229 1034</span>
+                <a href='mailto:valyanovvva@gmail.com'>valyanovvva@gmail.com</a>
+                <span>Дубай, ОАЭ</span>
+            </div>
+        "></div>
+
+        <!-- БЛОК 2: ABOUT ME -->
+        <div class="card" data-en="
+            <h2>About Me</h2>
+            <p style='font-size:1.05rem;'>Hello! My name is Sofia, I'm a Digital Business &amp; Data Science student based in Dubai. I combine analytical thinking with practical execution, using data and customer insights to improve processes &amp; performance, and have a strong interest in digital growth. My experience in communication, community management, and marketplace operations helps me understand both a business and customer perspectives. I'm looking for a part-time role where I can contribute to growth, efficiency, and real results.</p>
+            <p style='margin-top:0.8rem;'>
+                <span class='tag'>Fast learner (8000 wpm reading)</span>
+                <span class='tag'>Product thinking</span>
+                <span class='tag'>Communication &amp; stakeholder management</span>
+                <span class='tag'>Self-organization &amp; responsibility</span>
+                <span class='tag'>Adaptability</span>
+                <span class='tag'>Attention to detail</span>
+            </p>
+        " data-ru="
+            <h2>Обо мне</h2>
+            <p style='font-size:1.05rem;'>Привет! Меня зовут София, я студентка направления «Цифровой бизнес и наука о данных» в Дубае. Сочетаю аналитическое мышление с практической реализацией, использую данные и инсайты клиентов для улучшения процессов и показателей. Имею опыт в коммуникации, управлении сообществами и маркетплейс-операциях, что позволяет мне понимать и бизнес, и клиентов. Ищу частичную занятость, где смогу внести вклад в рост, эффективность и реальные результаты.</p>
+            <p style='margin-top:0.8rem;'>
+                <span class='tag'>Быстрое обучение (8000 зн/мин)</span>
+                <span class='tag'>Продуктовое мышление</span>
+                <span class='tag'>Коммуникация и работа с заказчиками</span><span class='tag'>Самоорганизация и ответственность</span>
+                <span class='tag'>Адаптивность</span>
+                <span class='tag'>Внимание к деталям</span>
+            </p>
+        "></div>
+
+        <!-- БЛОК 3: ОБРАЗОВАНИЕ -->
+        <div class="card" data-en="
+            <h2>Education</h2>
+            <div class='flex-grid'>
+                <div>
+                    <p><strong>Bachelor in Digital Business &amp; Data Science</strong><br>University of Europe for Applied Science | UAE<br><span class='tag'>2024 – 2027</span> <span class='tag'>GPA 3.1 / 4.0</span></p>
+                </div>
+                <div>
+                    <p><strong>Relevant coursework:</strong><br><span class='tag'>Digital Transformation</span> <span class='tag'>Big Data &amp; Analytics</span><br><span class='tag'>Marketing &amp; Sales</span> <span class='tag'>CRM</span><br><span class='tag'>Financial Accounting</span> <span class='tag'>IT Platforms</span></p>
+                </div>
+            </div>
+        " data-ru="
+            <h2>Образование</h2>
+            <div class='flex-grid'>
+                <div>
+                    <p><strong>Бакалавр цифрового бизнеса и науки о данных</strong><br>University of Europe for Applied Science | ОАЭ<br><span class='tag'>2024 – 2027</span> <span class='tag'>GPA 3.1 / 4.0</span></p>
+                </div>
+                <div>
+                    <p><strong>Ключевые курсы:</strong><br><span class='tag'>Цифровая трансформация</span> <span class='tag'>Большие данные и аналитика</span><br><span class='tag'>Маркетинг и продажи</span> <span class='tag'>CRM</span><br><span class='tag'>Финансовый учёт</span> <span class='tag'>IT-платформы</span></p>
+                </div>
+            </div>
+        "></div>
+
+        <!-- БЛОК 4: ОПЫТ -->
+        <div class="card" data-en="
+            <h2>Experience</h2>
+            <div class='exp-item'><strong>E-commerce Operations &amp; Marketplace Support</strong> (Freelance / Family Business) — <em>Ozon, eBay, Avito</em><br><span class='highlight'>Product listing, order tracking, customer satisfaction</span></div>
+            <div class='exp-item'><strong>Community Management &amp; Advertising</strong> — <em>Dubai Youth Community (5k+ TG)</em><br><span class='highlight'>Content planning, event announcements, advertising sales</span></div>
+            <div class='exp-item'><strong>Business Analytics</strong> — <em>University of Europe for Applied Science</em><br><span class='highlight'>Collected feedback data, built dashboards in Excel &amp; Power BI, delivered insights to improve performance</span></div>
+            <div class='exp-item'><strong>Co-founder · GameDev Studio (Flashnight Studios)</strong> <br><span class='highlight'>UI/UX design, playtesting, CRM integration, narrative development. Managed feedback loops and improved player retention</span></div>
+            <div class='exp-item'><strong>School President &amp; Student Council Head</strong> <br><span class='highlight'>Organized events, charity initiatives, student representation</span></div>
+        " data-ru="
+            <h2>Опыт</h2>
+            <div class='exp-item'><strong>Операции на маркетплейсах и поддержка</strong> (фриланс / семейный бизнес) — <em>Ozon, eBay, Avito</em> <br><span class='highlight'>Управление товарами, отслеживание заказов, работа с клиентами</span></div>
+            <div class='exp-item'><strong>Управление сообществом и реклама</strong> — <em>Dubai Youth Community (5k+ в TG)</em> <br><span class='highlight'>Планирование контента, анонсы мероприятий, продажа рекламы</span></div>
+            <div class='exp-item'><strong>Бизнес-аналитика</strong> — <em>University of Europe for Applied Science</em><br><span class='highlight'>Сбор данных обратной связи, создание дашбордов в Excel и Power BI, формирование рекомендаций</span></div>
+            <div class='exp-item'><strong>Сооснователь · GameDev-студия (Flashnight Studios)</strong> <br><span class='highlight'>UI/UX-дизайн, тестирование, интеграция CRM, нарратив.Управление циклами обратной связи и повышение удержания игроков</span></div>
+            <div class='exp-item'><strong>Президент школы и глава ученического совета</strong> <br><span class='highlight'>Организация мероприятий, благотворительных акций, представление интересов студентов</span></div>
+        "></div>
+
+        <!-- БЛОК 5: УЧЕБНЫЕ ПРОЕКТЫ -->
+        <div class="card" data-en="
+            <h2>Academic Projects</h2>
+            <div class='project-item'><strong>Customer Feedback Dashboard</strong> — <em>Power BI, Excel</em><br>Collected and visualized survey data, identified key satisfaction metrics.</div>
+            <div class='project-item'><strong>Sales Performance Report</strong> — <em>SQL, Python</em><br>Analyzed sales data and suggested assortment optimization.</div>
+        " data-ru="
+            <h2>Учебные проекты</h2>
+            <div class='project-item'><strong>Дашборд обратной связи клиентов</strong> — <em>Power BI, Excel</em><br>Собрала и визуализировала данные опросов, выявила ключевые метрики удовлетворённости.</div>
+            <div class='project-item'><strong>Отчёт по эффективности продаж</strong> — <em>SQL, Python</em><br>Проанализировала данные продаж и предложила оптимизацию ассортимента.</div>
+        "></div>
+
+        <!-- БЛОК 6: НАВЫКИ -->
+        <div class="card" data-en="
+            <h2>Skills</h2>
+            <div style='display:flex;flex-wrap:wrap;gap:0.4rem 0.8rem;margin-bottom:1rem;'>
+                <span class='tag'>Python (pandas, numpy)</span>
+                <span class='tag'>SQL (PostgreSQL, Azure)</span>
+                <span class='tag'>Power BI / Tableau</span>
+                <span class='tag'>Excel (Power Query, VBA)</span>
+                <span class='tag'>ETL / Data Pipelines</span>
+                <span class='tag'>Git / GitHub</span>
+                <span class='tag'>Power Automate</span>
+                <span class='tag'>Azure (Data Factory)</span>
+                <span class='tag'>Java / HTML/CSS</span>
+                <span class='tag'>AI-assisted (Cursor)</span>
+                <span class='tag'>Microsoft 365 / Teams</span>
+            </div>
+            <div>
+                <span class='tag'>Communication &amp; teamwork</span>
+                <span class='tag'>Fast learner (8000 wpm)</span>
+                <span class='tag'>Problem solving</span>
+                <span class='tag'>Attention to detail</span>
+                <span class='tag'>Product thinking</span>
+            </div>
+        " data-ru="
+            <h2>Навыки</h2>
+            <div style='display:flex;flex-wrap:wrap;gap:0.4rem 0.8rem;margin-bottom:1rem;'>
+                <span class='tag'>Python (pandas, numpy)</span>
+                <span class='tag'>SQL (PostgreSQL, Azure)</span>
+                <span class='tag'>Power BI / Tableau</span>
+                <span class='tag'>Excel (Power Query, VBA)</span>
+                <span class='tag'>ETL / Data Pipelines</span>
+                <span class='tag'>Git / GitHub</span>
+                <span class='tag'>Power Automate</span>
+                <span class='tag'>Azure (Data Factory)</span>
+                <span class='tag'>Java / HTML/CSS</span>
+                <span class='tag'>AI-assisted (Cursor)</span>
+                <span class='tag'>Microsoft 365 / Teams</span>
+            </div>
+            <div>
+                <span class='tag'>Коммуникация и работа в команде</span>
+                <span class='tag'>Быстрое обучение (8000 зн/мин)</span>
+                <span class='tag'>Решение проблем</span>
+                <span class='tag'>Внимание к деталям</span>
+                <span class='tag'>Продуктовое мышление</span>
+            </div>
+        "></div>
+
+        <!-- БЛОК 7: ЯЗЫКИ + КНОПКИ -->
+        <div class="card" data-en="
+            <h2>Languages</h2>
+            <p><span class='tag'>English – fluent (C1+)</span> <span class='tag'>Russian – native</span></p>
+            <br>
+            <button onclick='window.location.href=&quot;mailto:valyanovvva@gmail.com&quot;' class='btn'>Contact me</button><button onclick='downloadPDF()' class='btn' style='margin-left:0.6rem;background:#a3b8a3;'>Download PDF</button>
+            <br><br>
+            <button onclick='document.getElementById(&quot;contactPopup&quot;).style.display=&quot;block&quot;' class='btn' style='background:#c4bcae;color:#2d3e2d;'>Show contacts</button>
+            <div id='contactPopup' style='display:none; background:#f0ece4; padding:1.5rem; border-radius:28px; margin-top:1rem; border:2px solid #6b8e6b;'>
+                <p><strong>Phone:</strong> +971 56 229 1034</p>
+                <p><strong>Email:</strong> <a href='mailto:valyanovvva@gmail.com' style='color:#2d3e2d;'>valyanovvva@gmail.com</a></p>
+                <p><strong>Location:</strong> Dubai, UAE</p>
+                <button onclick='document.getElementById(&quot;contactPopup&quot;).style.display=&quot;none&quot;' class='btn' style='background:#a3b8a3;margin-top:0.5rem;'>Close</button>
+            </div>
+        " data-ru="
+            <h2>Языки</h2>
+            <p><span class='tag'>Английский – свободно (C1+)</span> <span class='tag'>Русский – родной</span></p>
+            <br>
+            <button onclick='window.location.href=&quot;mailto:valyanovvva@gmail.com&quot;' class='btn'>Связаться</button>
+            <button onclick='downloadPDF()' class='btn' style='margin-left:0.6rem;background:#a3b8a3;'>Скачать PDF</button>
+            <br><br>
+            <button onclick='document.getElementById(&quot;contactPopup&quot;).style.display=&quot;block&quot;' class='btn' style='background:#c4bcae;color:#2d3e2d;'>Показать контакты</button>
+            <div id='contactPopup' style='display:none; background:#f0ece4; padding:1.5rem; border-radius:28px; margin-top:1rem; border:2px solid #6b8e6b;'>
+                <p><strong>Телефон:</strong> +971 56 229 1034</p>
+                <p><strong>Email:</strong> <a href='mailto:valyanovvva@gmail.com' style='color:#2d3e2d;'>valyanovvva@gmail.com</a></p>
+                <p><strong>Локация:</strong> Дубай, ОАЭ</p>
+                <button onclick='document.getElementById(&quot;contactPopup&quot;).style.display=&quot;none&quot;' class='btn' style='background:#a3b8a3;margin-top:0.5rem;'>Закрыть</button>
+            </div>
+        "></div>
+
+    </div><!-- /content -->
+</div><!-- /container -->
+
+<script>
+    (function() {
+        // === ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКА ===
+        const toggleBtn = document.getElementById('langToggle');
+        let currentLang = 'en';
+
+        const cards = document.querySelectorAll('.card');
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            cards.forEach(card => {
+                const content = card.getAttribute('data-' + lang);
+                if (content) {
+                    card.innerHTML = content;
+                }
+            });
+            toggleBtn.textContent = lang === 'en' ? 'Russian' : 'English';
+            cards.forEach(c => c.classList.remove('visible'));
+            setTimeout(() => {
+                observer.disconnect();
+                cards.forEach(c => {
+                    const rect = c.getBoundingClientRect();
+                    if (rect.top < window.innerHeight - 100) {
+                        c.classList.add('visible');
+                    }
+                });
+                cards.forEach(c => observer.observe(c));
+            }, 50);
+        }
+
+        toggleBtn.addEventListener('click', function() {
+            const newLang = (currentLang === 'en') ? 'ru' : 'en';
+            setLanguage(newLang);
+        });
+
+        // === ПЛАВНОЕ ПОЯВЛЕНИЕ ===
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        setLanguage('en');
+        cards.forEach(card => observer.observe(card));
+    })();
+
+    // === ФУНКЦИЯ ДЛЯ СКАЧИВАНИЯ PDF ===
+    function downloadPDF() {
+        const element = document.getElementById('content');
+        const opt = {margin: 0.5,
+            filename: 'Sofia_Valyanova_CV.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+        };
+        html2pdf().set(opt).from(element).save();
+    }
+</script>
+</body>
+</html>
