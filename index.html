@@ -2,424 +2,1377 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sofia Valyanova · CV</title>
-    <!-- Библиотека для автоскачивания PDF -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <style>
-        /* ----- СБРОС И БАЗА ----- */
+        /* ── Reset & Base ── */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background: #f5f2eb;
-            color: #2d3e2d;
-            padding: 2rem 1rem;
-            line-height: 1.5;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: #F3F0EB;
+            color: #1E2B38;
+            padding: 2rem 1.5rem;
+            line-height: 1.6;
         }
+
         .container {
-            max-width: 1100px;
+            max-width: 1060px;
             margin: 0 auto;
         }
 
-        /* ----- ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКА ----- */
-        .lang-switch {
-            position: sticky;
-            top: 1rem;
-            z-index: 10;
-            text-align: right;
-            margin-bottom: 1rem;
+        /* ── Toolbar ── */
+        .toolbar {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.6rem;
+            margin-bottom: 1.4rem;
+            flex-wrap: wrap;
         }
-        .lang-switch button {
-            background: #6b8e6b;
-            border: none;
-            padding: 0.5rem 1.2rem;
-            border-radius: 40px;
+
+        .toolbar button {
+            font-family: 'Inter', sans-serif;
             font-weight: 600;
-            color: #f5f2eb;
+            font-size: 0.82rem;
+            padding: 0.5rem 1.4rem;
+            border: none;
+            border-radius: 60px;
             cursor: pointer;
             transition: all 0.25s ease;
-            box-shadow: 0 4px 12px rgba(80, 100, 80, 0.15);
+            box-shadow: 0 4px 14px rgba(30, 43, 56, 0.06);
+            letter-spacing: 0.01em;
         }
-        .lang-switch button:hover {
-            background: #5a7a5a;
+
+        .toolbar .lang-btn {
+            background: #1E2B38;
+            color: #FCFAF7;
+        }
+        .toolbar .lang-btn:hover {
+            background: #0F1A24;
             transform: scale(1.02);
         }
 
-        /* ----- КАРТОЧКИ С ПЛАВНЫМ ПОЯВЛЕНИЕМ ----- */
-        .card {
-            background: #e8e0d5;
-            padding: 2rem;
-            border-radius: 28px;
-            box-shadow: 0 12px 28px rgba(60, 80, 60, 0.08);
-            margin-bottom: 2rem;
-            transition: opacity 0.7s ease, transform 0.6s ease;
-            opacity: 0;
-            transform: translateY(30px);
+        .toolbar .pdf-btn {
+            background: #D98A44;
+            color: #1E2B38;
         }
-        .card.visible {
+        .toolbar .pdf-btn:hover {
+            background: #C47A34;
+            transform: scale(1.02);
+        }
+
+        /* ── Grid ── */
+        .cv-grid {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 1.5rem;
+            background: transparent;
+        }
+
+        @media (max-width: 820px) {
+            .cv-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+            body {
+                padding: 1rem 0.8rem;
+            }
+        }
+
+        /* ── Cards ── */
+        .card,
+        .card-side {
+            background: #FFFFFF;
+            border-radius: 22px;
+            padding: 1.6rem 1.8rem;
+            box-shadow: 0 8px 28px rgba(30, 43, 56, 0.05);
+            transition: opacity 0.55s ease, transform 0.5s ease;
+            opacity: 0;
+            transform: translateY(18px);
+        }
+
+        .card.visible,
+        .card-side.visible {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* ----- ТИПОГРАФИКА ----- */
-        h1 {
-            font-size: 2.8rem;
-            font-weight: 600;
-            letter-spacing: -0.02em;
-            color: #2d3e2d;
-        }
-        h2 {
-            font-size: 1.8rem;
-            font-weight: 500;
-            border-bottom: 3px solid #6b8e6b;
-            padding-bottom: 0.4rem;
-            margin-bottom: 1.2rem;
-            color: #2d3e2d;
-        }
-        .subhead {
-            font-size: 1.2rem;
-            color: #4a604a;
-            margin-top: 0.1rem;
-        }
-        .contact-grid {
+        .sidebar {
             display: flex;
-            flex-wrap: wrap;
-            gap: 0.6rem 1.2rem;
-            margin: 0.8rem 0 0.2rem;
-        }
-        .contact-grid a,
-        .contact-grid span {
-            background: #d4cdc0;
-            padding: 0.2rem 1rem;
-            border-radius: 40px;
-            text-decoration: none;
-            color: #2d3e2d;
-            font-weight: 500;
-        }
-        .tag {
-            display: inline-block;
-            background: #c4bcae;
-            padding: 0.25rem 1rem;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            margin: 0.2rem 0.3rem 0.2rem 0;
-        }
-        .flex-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+            flex-direction: column;
             gap: 1.2rem;
         }
-        @media (max-width: 700px) {
-            .flex-grid {
-                grid-template-columns: 1fr;
-            }
-            h1 {
-                font-size: 2rem;
-            }
+        .sidebar .card-side {
+            padding: 1.6rem 1.4rem;
         }
 
-        .exp-item {
-            background: #f0ece4;
-            padding: 0.8rem 1.2rem;
-            border-radius: 18px;
-            margin-bottom: 0.8rem;
-            border-left: 6px solid #6b8e6b;
+        /* ── Typography ── */
+        h1 {
+            font-size: 2.1rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: #1E2B38;
+            line-height: 1.1;
         }
-        .project-item {
-            background: #f0ece4;
-            padding: 0.8rem 1.2rem;
-            border-radius: 18px;
-            margin-bottom: 0.8rem;
-            border-left: 6px solid #a3b8a3;
-        }.btn {
-            display: inline-block;
-            background: #6b8e6b;
-            padding: 0.6rem 1.8rem;
-            border-radius: 60px;
+
+        h2 {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #3D6B7A;
+            border-bottom: 2px solid #EEEAE4;
+            padding-bottom: 0.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .subhead {
+            font-size: 0.92rem;
+            color: #4A7A8A;
+            font-weight: 400;
+            margin-top: 0.2rem;
+        }
+
+        .seeking {
+            font-size: 0.82rem;
+            color: #D98A44;
             font-weight: 600;
-            color: #f5f2eb;
-            text-decoration: none;
-            transition: background 0.2s;
             margin-top: 0.5rem;
+            letter-spacing: 0.01em;
+            background: #F8F4EE;
+            display: inline-block;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #EEEAE4;
+            padding: 0.15rem 0.9rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #1E2B38;
+            margin: 0.15rem 0.2rem 0.15rem 0;
+            letter-spacing: 0.01em;
+        }
+
+        .tag.tech {
+            background: #E4E9ED;
+            color: #1E3A4A;
+        }
+
+        .tag.accent {
+            background: #F2E8DB;
+            color: #A66C2E;
+        }
+
+        .tag.interest {
+            background: #E8F0F2;
+            color: #2A5A6A;
+        }
+
+        /* ── Sidebar specifics ── */
+        .profile-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1E2B38;
+            letter-spacing: -0.02em;
+        }
+
+        .profile-title {
+            font-size: 0.85rem;
+            color: #4A7A8A;
+            margin-top: 0.1rem;
+            font-weight: 400;
+        }
+
+        .contact-line {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            font-size: 0.82rem;
+            color: #1E2B38;
+            margin: 0.25rem 0;
+            padding: 0.2rem 0;
+        }
+
+        .contact-line .label {
+            font-weight: 500;
+            color: #4A7A8A;
+            min-width: 60px;
+            font-size: 0.72rem;
+            letter-spacing: 0.04em;
+        }
+
+        .contact-line a {
+            color: #1E2B38;
+            text-decoration: none;
+            border-bottom: 1px dotted #C4B8AA;
+        }
+        .contact-line a:hover {
+            color: #D98A44;
+            border-bottom-color: #D98A44;
+        }
+
+        .divider {
             border: none;
-            cursor: pointer;
+            border-top: 2px solid #EEEAE4;
+            margin: 0.8rem 0 1rem;
         }
-        .btn:hover {
-            background: #5a7a5a;
+
+        .skill-group {
+            margin-bottom: 0.8rem;
         }
-        .highlight {
-            background: #d4cdc0;
-            padding: 0.1rem 0.5rem;
-            border-radius: 16px;
+        .skill-group .label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #3D6B7A;
+            margin-bottom: 0.3rem;
+            display: block;
+        }
+
+        .lang-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            padding: 0.15rem 0;
+            border-bottom: 1px solid #F0ECE4;
+        }
+        .lang-item .level {
+            color: #4A7A8A;
+            font-weight: 500;
+            font-size: 0.78rem;
+        }
+
+        .interests-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+            margin-top: 0.2rem;
+        }
+
+        /* ── Main content ── */
+        .main {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+        .main .card {
+            padding: 1.6rem 1.8rem;
+        }
+
+        .profile-text {
+            font-size: 0.92rem;
+            line-height: 1.7;
+            color: #1E2B38;
+            margin-bottom: 0.6rem;
+        }
+        .profile-text strong {
+            color: #0F1A24;
+        }
+
+        /* Experience */
+        .exp-item {
+            background: #F8F6F3;
+            border-radius: 14px;
+            padding: 0.9rem 1.2rem;
+            margin-bottom: 0.7rem;
+            border-left: 4px solid #D98A44;
+            transition: background 0.2s;
+        }
+        .exp-item:hover {
+            background: #F2EEE8;
+        }
+
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 0.2rem 0.6rem;
+        }
+        .exp-header .role {
+            font-weight: 700;
+            color: #1E2B38;
+            font-size: 0.92rem;
+        }
+        .exp-header .date {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: #4A7A8A;
+            white-space: nowrap;
+            background: #EDE8E0;
+            padding: 0.05rem 0.8rem;
+            border-radius: 30px;
+        }
+        .exp-item .org {
+            color: #4A7A8A;
+            font-size: 0.82rem;
+            margin: 0.1rem 0 0.35rem;
             font-weight: 500;
         }
+        .exp-item .bullets {
+            list-style: none;
+            padding: 0;
+        }
+        .exp-item .bullets li {
+            padding-left: 1.1em;
+            position: relative;
+            font-size: 0.85rem;
+            color: #1E2B38;
+            margin-bottom: 0.15rem;
+            line-height: 1.55;
+        }
+        .exp-item .bullets li::before {
+            content: "◆";
+            position: absolute;
+            left: 0;
+            color: #D98A44;
+            font-size: 0.5rem;
+            top: 0.45rem;
+        }
 
-        /* ----- СТИЛИ ДЛЯ ПЕЧАТИ (PDF) ----- */
-        @media print {
-            .lang-switch {
-                display: none;
+        /* Projects */
+        .project-item {
+            background: #F8F6F3;
+            border-radius: 14px;
+            padding: 0.9rem 1.2rem;
+            margin-bottom: 0.7rem;
+            border-left: 4px solid #3D6B7A;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            transition: background 0.2s;
+        }
+        .project-item:hover {
+            background: #F2EEE8;
+        }
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 0.2rem 0.6rem;
+            margin-bottom: 0.2rem;
+        }
+        .project-item strong {
+            color: #1E2B38;
+            font-size: 0.9rem;
+        }
+        .project-item .stack {
+            font-size: 0.68rem;
+            color: #3D6B7A;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+
+        /* Education */
+        .edu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem 1.2rem;
+        }
+        @media (max-width: 600px) {
+            .edu-grid {
+                grid-template-columns: 1fr;
             }
-            .card {
+        }
+        .edu-block p {
+            font-size: 0.88rem;
+        }
+        .edu-block .meta {
+            color: #4A7A8A;
+            font-size: 0.8rem;
+            margin: 0.15rem 0;
+        }
+        .edu-block .tags {
+            margin-top: 0.3rem;
+        }
+
+        /* Contact popup */
+        .contact-popup {
+            display: none;
+            background: #F8F6F3;
+            padding: 1.2rem 1.4rem;
+            border-radius: 16px;
+            margin-top: 0.8rem;
+            border: 2px solid #D98A44;
+        }
+        .contact-popup p {
+            font-size: 0.9rem;
+            margin-bottom: 0.2rem;
+        }
+        .contact-popup a {
+            color: #1E2B38;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #1E2B38;
+            padding: 0.45rem 1.6rem;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #FCFAF7;
+            text-decoration: none;
+            transition: background 0.2s, transform 0.15s;
+            border: none;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+        }
+        .btn:hover {
+            background: #0F1A24;
+            transform: scale(1.02);
+        }
+        .btn.ghost {
+            background: #EEEAE4;
+            color: #1E2B38;
+            margin-left: 0.5rem;
+        }
+        .btn.ghost:hover {
+            background: #DCD4C8;
+        }
+        .btn.secondary {
+            background: #D98A44;
+            color: #1E2B38;
+            margin-left: 0;
+        }
+        .btn.secondary:hover {
+            background: #C47A34;
+        }
+
+        .action-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.8rem;
+        }
+
+        /* ── Print ── */
+        @media print {
+            .toolbar {
+                display: none !important;
+            }
+            .card,
+            .card-side {
                 opacity: 1 !important;
                 transform: none !important;
-                box-shadow: none;
+                box-shadow: none !important;
                 break-inside: avoid;
+                border: 1px solid #EEEAE4;
             }
             body {
                 background: white;
-                padding: 0.5in;
+                padding: 0.3in;
             }
+            .cv-grid {
+                gap: 0.8rem;
+            }
+            .contact-popup {
+                display: none !important;
+            }
+            .exp-item:hover,
+            .project-item:hover {
+                background: #F8F6F3 !important;
+            }
+        }
+
+        /* ── Utilities ── */
+        .mt-1 {
+            margin-top: 0.6rem;
+        }
+        .flex-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+        }
+        .text-muted {
+            color: #4A7A8A;
+            font-size: 0.82rem;
         }
     </style>
 </head>
 <body>
-<div class="container">
 
-    <!-- ===== ПЕРЕКЛЮЧАТЕЛЬ ===== -->
-    <div class="lang-switch">
-        <button id="langToggle">Russian</button>
-    </div>
+    <div class="container">
 
-    <!-- ===== КОНТЕНТ ===== -->
-    <div id="content">
+        <!-- Toolbar -->
+        <div class="toolbar">
+            <button class="lang-btn" id="langToggle">Русский</button>
+            <button class="pdf-btn" onclick="downloadPDF()">Download PDF</button>
+        </div>
 
-        <!-- БЛОК 1: ИМЯ + КОНТАКТЫ -->
-        <div class="card visible" data-en="
-            <h1>Sofia Valyanova</h1>
-            <div class='subhead'>BA. Sc in Digital Business &amp; Data Science</div>
-            <div class='contact-grid'>
-                <span>Phone: +971 56 229 1034</span>
-                <a href='mailto:valyanovvva@gmail.com'>valyanovvva@gmail.com</a>
-                <span>Dubai, UAE</span>
-            </div>
-        " data-ru="
-            <h1>София Валянова</h1>
-            <div class='subhead'>Бакалавр цифрового бизнеса и науки о данных</div>
-            <div class='contact-grid'>
-                <span>Телефон: +971 56 229 1034</span>
-                <a href='mailto:valyanovvva@gmail.com'>valyanovvva@gmail.com</a>
-                <span>Дубай, ОАЭ</span>
-            </div>
-        "></div>
+        <!-- CV Grid -->
+        <div class="cv-grid" id="cvGrid">
 
-        <!-- БЛОК 2: ABOUT ME -->
-        <div class="card" data-en="
-            <h2>About Me</h2>
-            <p style='font-size:1.05rem;'>Hello! My name is Sofia, I'm a Digital Business &amp; Data Science student based in Dubai. I combine analytical thinking with practical execution, using data and customer insights to improve processes &amp; performance, and have a strong interest in digital growth. My experience in communication, community management, and marketplace operations helps me understand both a business and customer perspectives. I'm looking for a role where I can contribute to growth, efficiency, and real results.</p>
-            <p style='margin-top:0.8rem;'>
-                <span class='tag'>Fast learner (8000 wpm reading)</span>
-                <span class='tag'>Product thinking</span>
-                <span class='tag'>Communication &amp; stakeholder management</span>
-                <span class='tag'>Self-organization &amp; responsibility</span>
-                <span class='tag'>Adaptability</span>
-                <span class='tag'>Attention to detail</span>
-            </p>
-        " data-ru="
-            <h2>Обо мне</h2>
-            <p style='font-size:1.05rem;'>Привет! Меня зовут София, я студентка направления «Цифровой бизнес и наука о данных» в Дубае. Сочетаю аналитическое мышление с практической реализацией, использую данные и инсайты клиентов для улучшения процессов и показателей. Имею опыт в коммуникации, управлении сообществами и маркетплейс-операциях, что позволяет мне понимать и бизнес, и клиентов. Ищу занятость, где смогу внести вклад в рост, эффективность и реальные результаты.</p>
-            <p style='margin-top:0.8rem;'>
-                <span class='tag'>Быстрое обучение (8000 зн/мин)</span>
-                <span class='tag'>Продуктовое мышление</span>
-                <span class='tag'>Коммуникация и работа с заказчиками</span><span class='tag'>Самоорганизация и ответственность</span>
-                <span class='tag'>Адаптивность</span>
-                <span class='tag'>Внимание к деталям</span>
-            </p>
-        "></div>
+            <!-- ===== SIDEBAR ===== -->
+            <div class="sidebar" id="sidebar">
+                <!-- Profile Card -->
+                <div class="card-side" id="card-profile">
+                    <div class="profile-name">Sofia Valyanova</div>
+                    <div class="profile-title">BSc Digital Business &amp; Data Science</div>
+                    <hr class="divider" />
+                    <div class="contact-line"><span class="label">Location</span> Dubai, UAE</div>
+                    <div class="contact-line"><span class="label">Phone</span> +971 56 229 1034</div>
+                    <div class="contact-line"><span class="label">Email</span> <a href="mailto:valyanovvva@gmail.com">valyanovvva@gmail.com</a></div>
+                    <div class="contact-line"><span class="label">Visa</span> Student Visa · UAE</div>
+                    <hr class="divider" />
 
-        <!-- БЛОК 3: ОБРАЗОВАНИЕ -->
-        <div class="card" data-en="
-            <h2>Education</h2>
-            <div class='flex-grid'>
-                <div>
-                    <p><strong>Bachelor in Digital Business &amp; Data Science</strong><br>University of Europe for Applied Science | UAE<br><span class='tag'>2024 – 2027</span> <span class='tag'>GPA 3.1 / 4.0</span></p>
+                    <div class="skill-group">
+                        <span class="label">Core traits</span>
+                        <span class="tag accent">Innovative</span>
+                        <span class="tag accent">Adaptable</span>
+                        <span class="tag accent">Curious</span>
+                        <span class="tag accent">Strategic</span>
+                        <span class="tag accent">Persuasive</span>
+                    </div>
+
+                    <div class="skill-group">
+                        <span class="label">Languages</span>
+                        <div class="lang-item"><span>English</span><span class="level">C1+ · Fluent</span></div>
+                        <div class="lang-item"><span>Russian</span><span class="level">Native</span></div>
+                        <div class="lang-item"><span>Tatar</span><span class="level">Basic · Heritage</span></div>
+                    </div>
+
+                    <div class="skill-group">
+                        <span class="label">Quick facts</span>
+                        <div style="font-size:0.82rem; color:#1E2B38; line-height:1.6;">
+                            Born in Russia · UAE Residence<br>
+                            Tatar heritage · EU (Bulgarian)
+                        </div>
+                    </div>
+
+                    <div class="skill-group">
+                        <span class="label">Interests</span>
+                        <div class="interests-grid" id="interests-container">
+                            <!-- injected by JS -->
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <p><strong>Relevant coursework:</strong><br><span class='tag'>Digital Transformation</span> <span class='tag'>Big Data &amp; Analytics</span><br><span class='tag'>Marketing &amp; Sales</span> <span class='tag'>CRM</span><br><span class='tag'>Financial Accounting</span> <span class='tag'>IT Platforms</span></p>
+
+                <!-- Skills Sidebar -->
+                <div class="card-side" id="card-skills-side">
+                    <h2>Expertise</h2>
+                    <div class="skill-group">
+                        <span class="label">Data &amp; Analytics</span>
+                        <span class="tag tech">Python · pandas</span>
+                        <span class="tag tech">SQL · PostgreSQL</span>
+                        <span class="tag tech">Power BI</span>
+                        <span class="tag tech">Data Viz</span>
+                        <span class="tag tech">Excel · VBA</span>
+                        <span class="tag tech">ETL</span>
+                    </div>
+                    <div class="skill-group">
+                        <span class="label">Dev &amp; Automation</span>
+                        <span class="tag tech">Python scripting</span>
+                        <span class="tag tech">Node.js</span>
+                        <span class="tag tech">AI/LLM integration (OpenAI)</span>
+                        <span class="tag tech">Telegram Bot API</span>
+                        <span class="tag tech">HTML / CSS / Java</span>
+                        <span class="tag tech">Azure · Data Factory</span>
+                        <span class="tag tech">Git</span>
+                        <span class="tag tech">Power Automate</span>
+                    </div>
+                    <div class="skill-group">
+                        <span class="label">Business &amp; Soft</span>
+                        <span class="tag">Agile · Scrum</span>
+                        <span class="tag">CRM</span>
+                        <span class="tag">Requirements</span>
+                        <span class="tag">Stakeholder Comms</span>
+                        <span class="tag">Process Optimization</span>
+                        <span class="tag">Self-organized</span>
+                    </div>
                 </div>
             </div>
-        " data-ru="
-            <h2>Образование</h2>
-            <div class='flex-grid'>
-                <div>
-                    <p><strong>Бакалавр цифрового бизнеса и науки о данных</strong><br>University of Europe for Applied Science | ОАЭ<br><span class='tag'>2024 – 2027</span> <span class='tag'>GPA 3.1 / 4.0</span></p>
+
+            <!-- ===== MAIN ===== -->
+            <div class="main" id="main">
+
+                <!-- About -->
+                <div class="card" id="card-about">
+                    <h2>About</h2>
+                    <p class="profile-text">
+                        I'm a Digital Business &amp; Data Science student based in Dubai who can turn data and customer insights into streamlined processes and measurable performance gains. With hands-on experience in community management, e-commerce operations, and product development, I bridge the gap between business strategy and technical execution. I'm eager to apply my analytical toolkit and cross-functional communication skills to drive efficiency and deliver tangible results for a growth-focused team.
+                    </p>
+                    <div class="flex-wrap" style="margin-top:0.4rem;">
+                        <span class="tag accent">Data-driven</span>
+                        <span class="tag accent">Process automation</span>
+                        <span class="tag accent">BI &amp; dashboards</span>
+                        <span class="tag accent">Cross-functional</span>
+                        <span class="tag accent">Agile · Scrum</span>
+                        <span class="tag accent">8,000 wpm</span>
+                    </div>
+                    <div style="margin-top:0.8rem;">
+                        <span class="seeking">Open to full‑time · part‑time · internships</span>
+                    </div>
                 </div>
-                <div>
-                    <p><strong>Ключевые курсы:</strong><br><span class='tag'>Цифровая трансформация</span> <span class='tag'>Большие данные и аналитика</span><br><span class='tag'>Маркетинг и продажи</span> <span class='tag'>CRM</span><br><span class='tag'>Финансовый учёт</span> <span class='tag'>IT-платформы</span></p>
+
+                <!-- Experience -->
+                <div class="card" id="card-exp">
+                    <h2>Experience</h2>
+
+                    <div class="exp-item">
+                        <div class="exp-header">
+                            <span class="role">Co‑founder &amp; Product Lead</span>
+                            <span class="date">Mar 2023 – Present</span>
+                        </div>
+                        <div class="org">Flashnight Studios · GameDev</div>
+                        <ul class="bullets">
+                            <li>Led UI/UX and playtesting loops</li>
+                            <li>Integrated a CRM to segment players and track KPIs, boosting repeat sessions</li>
+                            <li>Orchestrated a cross‑functional team using Agile sprints and task boards</li>
+                            <li>Owned narrative design and contributed to front‑end code</li>
+                        </ul>
+                    </div>
+
+                    <div class="exp-item">
+                        <div class="exp-header">
+                            <span class="role">Community Manager &amp; Ad Sales</span>
+                            <span class="date">Current</span>
+                        </div>
+                        <div class="org">Dubai Youth Community · 5k+ Telegram</div>
+                        <ul class="bullets">
+                            <li>Grew and managed a 5,000‑member community with consistent engagement</li>
+                            <li>Closed ad partnerships with local businesses</li>
+                            <li>Built Telegram bots for ticket reservations and automated scheduling, cutting manual work by ~80%</li>
+                        </ul>
+                    </div>
+
+                    <div class="exp-item">
+                        <div class="exp-header">
+                            <span class="role">E‑commerce Operations</span>
+                            <span class="date">Mar 2021 – Aug 2025</span>
+                        </div>
+                        <div class="org">Freelance · Ozon, eBay, Avito</div>
+                        <ul class="bullets">
+                            <li>Managed listings, inventory, and pricing across 3 platforms simultaneously</li>
+                            <li>Maintained high seller ratings through diligent order tracking and customer care</li>
+                            <li>Analyzed sales data to spot trends and optimize assortment</li>
+                        </ul>
+                    </div>
+
+                    <div class="exp-item">
+                        <div class="exp-header">
+                            <span class="role">Business Analytics Assistant</span>
+                            <span class="date">May – Jul 2024</span>
+                        </div>
+                        <div class="org">University of Europe for Applied Sciences</div>
+                        <ul class="bullets">
+                            <li>Cleaned and structured student feedback data across multiple service categories</li>
+                            <li>Built interactive Excel &amp; Power BI dashboards to visualize KPIs and satisfaction</li>
+                            <li>Presented data‑driven recommendations that were adopted for curriculum improvements</li>
+                        </ul>
+                    </div>
+
+                    <div class="exp-item">
+                        <div class="exp-header">
+                            <span class="role">School President &amp; Student Council Head</span>
+                            <span class="date">Sep 2021 – Jul 2024</span>
+                        </div>
+                        <div class="org">Secondary School</div>
+                        <ul class="bullets">
+                            <li>Led council operations, organized events and charity drives, and served as the main liaison between students and administration</li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        "></div>
 
-        <!-- БЛОК 4: ОПЫТ -->
-        <div class="card" data-en="
-            <h2>Experience</h2>
-            <div class='exp-item'><strong>E-commerce Operations &amp; Marketplace Support</strong> (Freelance / Family Business) — <em>Ozon, eBay, Avito</em><br><span class='highlight'>Product listing, order tracking, customer satisfaction</span></div>
-            <div class='exp-item'><strong>Community Management &amp; Advertising</strong> — <em>Dubai Youth Community (5k+ TG)</em><br><span class='highlight'>Content planning, event announcements, advertising sales</span></div>
-            <div class='exp-item'><strong>Business Analytics</strong> — <em>University of Europe for Applied Science</em><br><span class='highlight'>Collected feedback data, built dashboards in Excel &amp; Power BI, delivered insights to improve performance</span></div>
-            <div class='exp-item'><strong>Co-founder · GameDev Studio (Flashnight Studios)</strong> <br><span class='highlight'>UI/UX design, playtesting, CRM integration, narrative development. Managed feedback loops and improved player retention</span></div>
-            <div class='exp-item'><strong>School President &amp; Student Council Head</strong> <br><span class='highlight'>Organized events, charity initiatives, student representation</span></div>
-        " data-ru="
-            <h2>Опыт</h2>
-            <div class='exp-item'><strong>Операции на маркетплейсах и поддержка</strong> (фриланс / семейный бизнес) — <em>Ozon, eBay, Avito</em> <br><span class='highlight'>Управление товарами, отслеживание заказов, работа с клиентами</span></div>
-            <div class='exp-item'><strong>Управление сообществом и реклама</strong> — <em>Dubai Youth Community (5k+ в TG)</em> <br><span class='highlight'>Планирование контента, анонсы мероприятий, продажа рекламы</span></div>
-            <div class='exp-item'><strong>Бизнес-аналитика</strong> — <em>University of Europe for Applied Science</em><br><span class='highlight'>Сбор данных обратной связи, создание дашбордов в Excel и Power BI, формирование рекомендаций</span></div>
-            <div class='exp-item'><strong>Сооснователь · GameDev-студия (Flashnight Studios)</strong> <br><span class='highlight'>UI/UX-дизайн, тестирование, интеграция CRM, нарратив.Управление циклами обратной связи и повышение удержания игроков</span></div>
-            <div class='exp-item'><strong>Президент школы и глава ученического совета</strong> <br><span class='highlight'>Организация мероприятий, благотворительных акций, представление интересов студентов</span></div>
-        "></div>
+                <!-- Education -->
+                <div class="card" id="card-edu">
+                    <h2>Education</h2>
+                    <div class="edu-grid">
+                        <div class="edu-block">
+                            <p><strong>BSc Digital Business &amp; Data Science</strong></p>
+                            <p class="meta">University of Europe for Applied Sciences · Dubai, UAE</p>
+                            <div class="tags">
+                                <span class="tag">2024 – 2027</span>
+                                <span class="tag">GPA 3.1 / 4.0</span>
+                            </div>
+                        </div>
+                        <div class="edu-block">
+                            <p style="font-size:0.7rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:#3D6B7A; margin-bottom:0.3rem;">Coursework</p>
+                            <span class="tag">Digital Transformation</span>
+                            <span class="tag">Big Data</span>
+                            <span class="tag">Marketing &amp; Sales</span>
+                            <span class="tag">CRM</span>
+                            <span class="tag">Financial Accounting</span>
+                            <span class="tag">IT Platforms</span>
+                            <span class="tag">Agile PM</span>
+                            <span class="tag">Frontend</span>
+                            <span class="tag">IT Security</span>
+                            <span class="tag">AI</span>
+                            <span class="tag">Programming</span>
+                            <span class="tag">Quant &amp; Qual Methods</span>
+                        </div>
+                    </div>
+                </div>
 
-        <!-- БЛОК 5: УЧЕБНЫЕ ПРОЕКТЫ -->
-        <div class="card" data-en="
-            <h2>Academic Projects</h2>
-            <div class='project-item'><strong>Customer Feedback Dashboard</strong> — <em>Power BI, Excel</em><br>Collected and visualized survey data, identified key satisfaction metrics.</div>
-            <div class='project-item'><strong>Sales Performance Report</strong> — <em>SQL, Python</em><br>Analyzed sales data and suggested assortment optimization.</div>
-        " data-ru="
-            <h2>Учебные проекты</h2>
-            <div class='project-item'><strong>Дашборд обратной связи клиентов</strong> — <em>Power BI, Excel</em><br>Собрала и визуализировала данные опросов, выявила ключевые метрики удовлетворённости.</div>
-            <div class='project-item'><strong>Отчёт по эффективности продаж</strong> — <em>SQL, Python</em><br>Проанализировала данные продаж и предложила оптимизацию ассортимента.</div>
-        "></div>
+                <!-- Projects -->
+                <div class="card" id="card-projects">
+                    <h2>Projects</h2>
 
-        <!-- БЛОК 6: НАВЫКИ -->
-        <div class="card" data-en="
-            <h2>Skills</h2>
-            <div style='display:flex;flex-wrap:wrap;gap:0.4rem 0.8rem;margin-bottom:1rem;'>
-                <span class='tag'>Python (pandas, numpy)</span>
-                <span class='tag'>SQL (PostgreSQL, Azure)</span>
-                <span class='tag'>Power BI / Tableau</span>
-                <span class='tag'>Excel (Power Query, VBA)</span>
-                <span class='tag'>ETL / Data Pipelines</span>
-                <span class='tag'>Git / GitHub</span>
-                <span class='tag'>Power Automate</span>
-                <span class='tag'>Azure (Data Factory)</span>
-                <span class='tag'>Java / HTML/CSS</span>
-                <span class='tag'>AI-assisted (Cursor)</span>
-                <span class='tag'>Microsoft 365 / Teams</span>
-            </div>
-            <div>
-                <span class='tag'>Communication &amp; teamwork</span>
-                <span class='tag'>Fast learner (8000 wpm)</span>
-                <span class='tag'>Problem solving</span>
-                <span class='tag'>Attention to detail</span>
-                <span class='tag'>Product thinking</span>
-            </div>
-        " data-ru="
-            <h2>Навыки</h2>
-            <div style='display:flex;flex-wrap:wrap;gap:0.4rem 0.8rem;margin-bottom:1rem;'>
-                <span class='tag'>Python (pandas, numpy)</span>
-                <span class='tag'>SQL (PostgreSQL, Azure)</span>
-                <span class='tag'>Power BI / Tableau</span>
-                <span class='tag'>Excel (Power Query, VBA)</span>
-                <span class='tag'>ETL / Data Pipelines</span>
-                <span class='tag'>Git / GitHub</span>
-                <span class='tag'>Power Automate</span>
-                <span class='tag'>Azure (Data Factory)</span>
-                <span class='tag'>Java / HTML/CSS</span>
-                <span class='tag'>AI-assisted (Cursor)</span>
-                <span class='tag'>Microsoft 365 / Teams</span>
-            </div>
-            <div>
-                <span class='tag'>Коммуникация и работа в команде</span>
-                <span class='tag'>Быстрое обучение (8000 зн/мин)</span>
-                <span class='tag'>Решение проблем</span>
-                <span class='tag'>Внимание к деталям</span>
-                <span class='tag'>Продуктовое мышление</span>
-            </div>
-        "></div>
+                    <div class="project-item">
+                        <div class="project-header">
+                            <strong>Interactive CV / Resume</strong>
+                            <span class="stack">HTML · CSS · JavaScript · html2pdf</span>
+                        </div>
+                        Designed and developed a fully responsive, bilingual (EN/RU) CV with one-click PDF export. Implemented dynamic language switching, intersection-based reveal animations, and a clean, recruiter-optimized layout that adapts to print and screen.
+                    </div>
 
-        <!-- БЛОК 7: ЯЗЫКИ + КНОПКИ -->
-        <div class="card" data-en="
-            <h2>Languages</h2>
-            <p><span class='tag'>English – fluent (C1+)</span> <span class='tag'>Russian – native</span></p>
-            <br>
-            <button onclick='window.location.href=&quot;mailto:valyanovvva@gmail.com&quot;' class='btn'>Contact me</button><button onclick='downloadPDF()' class='btn' style='margin-left:0.6rem;background:#a3b8a3;'>Download PDF</button>
-            <br><br>
-            <button onclick='document.getElementById(&quot;contactPopup&quot;).style.display=&quot;block&quot;' class='btn' style='background:#c4bcae;color:#2d3e2d;'>Show contacts</button>
-            <div id='contactPopup' style='display:none; background:#f0ece4; padding:1.5rem; border-radius:28px; margin-top:1rem; border:2px solid #6b8e6b;'>
-                <p><strong>Phone:</strong> +971 56 229 1034</p>
-                <p><strong>Email:</strong> <a href='mailto:valyanovvva@gmail.com' style='color:#2d3e2d;'>valyanovvva@gmail.com</a></p>
-                <p><strong>Location:</strong> Dubai, UAE</p>
-                <button onclick='document.getElementById(&quot;contactPopup&quot;).style.display=&quot;none&quot;' class='btn' style='background:#a3b8a3;margin-top:0.5rem;'>Close</button>
-            </div>
-        " data-ru="
-            <h2>Языки</h2>
-            <p><span class='tag'>Английский – свободно (C1+)</span> <span class='tag'>Русский – родной</span></p>
-            <br>
-            <button onclick='window.location.href=&quot;mailto:valyanovvva@gmail.com&quot;' class='btn'>Связаться</button>
-            <button onclick='downloadPDF()' class='btn' style='margin-left:0.6rem;background:#a3b8a3;'>Скачать PDF</button>
-            <br><br>
-            <button onclick='document.getElementById(&quot;contactPopup&quot;).style.display=&quot;block&quot;' class='btn' style='background:#c4bcae;color:#2d3e2d;'>Показать контакты</button>
-            <div id='contactPopup' style='display:none; background:#f0ece4; padding:1.5rem; border-radius:28px; margin-top:1rem; border:2px solid #6b8e6b;'>
-                <p><strong>Телефон:</strong> +971 56 229 1034</p>
-                <p><strong>Email:</strong> <a href='mailto:valyanovvva@gmail.com' style='color:#2d3e2d;'>valyanovvva@gmail.com</a></p>
-                <p><strong>Локация:</strong> Дубай, ОАЭ</p>
-                <button onclick='document.getElementById(&quot;contactPopup&quot;).style.display=&quot;none&quot;' class='btn' style='background:#a3b8a3;margin-top:0.5rem;'>Закрыть</button>
-            </div>
-        "></div>
+                    <div class="project-item">
+                        <div class="project-header">
+                            <strong>Telegram Ticket Reservation Bot</strong>
+                            <span class="stack">Python · Bot API · SQLite</span>
+                        </div>
+                        End‑to‑end chatbot for event ticket reservations: users pick events, choose seats, get confirmations. Admin panel for capacity management and waitlist notifications. Reduced manual ticket handling to zero.
+                    </div>
 
-    </div><!-- /content -->
-</div><!-- /container -->
+                    <div class="project-item">
+                        <div class="project-header">
+                            <strong>Automated Content Scheduler</strong>
+                            <span class="stack">Python · Telegram Bot API</span>
+                        </div>
+                        Bot that automates event announcements for a 5,000‑member channel. Eliminated manual posting and cut recurring admin work by ~80%.
+                    </div>
 
-<script>
-    (function() {
-        // === ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКА ===
-        const toggleBtn = document.getElementById('langToggle');
+                    <div class="project-item">
+                        <div class="project-header">
+                            <strong>Customer Satisfaction BI Dashboard</strong>
+                            <span class="stack">Power BI · Excel · Power Query</span>
+                        </div>
+                        End‑to‑end BI pipeline: collected survey data, cleaned in Power Query, built an interactive dashboard tracking NPS and satisfaction drivers. Identified 2 underperforming areas, recommendations adopted.
+                    </div>
+
+                    <div class="project-item">
+                        <div class="project-header">
+                            <strong>Sales Performance &amp; Assortment Analysis</strong>
+                            <span class="stack">SQL · PostgreSQL · Python · pandas</span>
+                        </div>
+                        Analyzed 12 months of transaction data to model seasonal demand and SKU performance. Delivered a report with assortment optimization recommendations and projected revenue impact.
+                    </div>
+
+                    <div class="project-item">
+                        <div class="project-header">
+                            <strong>E‑commerce Price Monitoring Script</strong>
+                            <span class="stack">Python · web scraping · pandas</span>
+                        </div>
+                        Built a Python script to monitor competitor pricing across marketplaces, aggregating data into structured reports. Automated a manual process, saving several hours per week.
+                    </div>
+                </div>
+
+                <!-- Contact -->
+                <div class="card" id="card-contact">
+                    <h2>Get in touch</h2>
+                    <div class="action-row">
+                        <a href="mailto:valyanovvva@gmail.com" class="btn">Email me</a>
+                        <button onclick="togglePopup()" class="btn ghost">Show contacts</button>
+                    </div>
+                    <div class="contact-popup" id="contactPopup">
+                        <p><strong>Phone</strong> &nbsp; +971 56 229 1034</p>
+                        <p><strong>Email</strong> &nbsp; <a href="mailto:valyanovvva@gmail.com">valyanovvva@gmail.com</a></p>
+                        <p><strong>Location</strong> &nbsp; Dubai, UAE</p>
+                        <button onclick="togglePopup()" class="btn secondary" style="margin-top:0.6rem;">Close</button>
+                    </div>
+                </div>
+
+            </div><!-- /main -->
+        </div><!-- /cv-grid -->
+    </div><!-- /container -->
+
+    <script>
+        // ── Content ──
+        const interestsData = {
+            en: [
+                'Strategic games',
+                'Hackathons & side builds',
+                'Sci‑Fi & behavioral psychology',
+                'Travel & urban exploration',
+                'Debate & public speaking'
+            ],
+            ru: [
+                'Стратегические игры',
+                'Хакатоны и пет-проекты',
+                'Научная фантастика и психология',
+                'Путешествия и городские исследования',
+                'Дебаты и выступления'
+            ]
+        };
+
+        const content = {
+            en: {
+                profile: `
+                    <div class="profile-name">Sofia Valyanova</div>
+                    <div class="profile-title">BSc Digital Business &amp; Data Science</div>
+                    <hr class="divider" />
+                    <div class="contact-line"><span class="label">Location</span> Dubai, UAE</div>
+                    <div class="contact-line"><span class="label">Phone</span> +971 56 229 1034</div>
+                    <div class="contact-line"><span class="label">Email</span> <a href="mailto:valyanovvva@gmail.com">valyanovvva@gmail.com</a></div>
+                    <div class="contact-line"><span class="label">Visa</span> Student Visa · UAE</div>
+                    <hr class="divider" />
+                    <div class="skill-group">
+                        <span class="label">Core traits</span>
+                        <span class="tag accent">Innovative</span>
+                        <span class="tag accent">Adaptable</span>
+                        <span class="tag accent">Curious</span>
+                        <span class="tag accent">Strategic</span>
+                        <span class="tag accent">Persuasive</span>
+                    </div>
+                    <div class="skill-group">
+                        <span class="label">Languages</span>
+                        <div class="lang-item"><span>English</span><span class="level">C1+ · Fluent</span></div>
+                        <div class="lang-item"><span>Russian</span><span class="level">Native</span></div>
+                        <div class="lang-item"><span>Tatar</span><span class="level">Basic · Heritage</span></div>
+                    </div>
+                    <div class="skill-group">
+                        <span class="label">Quick facts</span>
+                        <div style="font-size:0.82rem; color:#1E2B38; line-height:1.6;">
+                           Multicultural: Born in Russia · UAE Residence<br>
+                            Tatar heritage · EU (Bulgarian)
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <span class="label">Interests</span>
+                        <div class="interests-grid" id="interests-container"></div>
+                    </div>
+                `,
+                skills_side: `
+                    <h2>Expertise</h2>
+                    <div class="skill-group">
+                        <span class="label">Data &amp; Analytics</span>
+                        <span class="tag tech">Python · pandas</span>
+                        <span class="tag tech">SQL · PostgreSQL</span>
+                        <span class="tag tech">Power BI</span>
+                        <span class="tag tech">Data Viz</span>
+                        <span class="tag tech">Excel · VBA</span>
+                        <span class="tag tech">ETL</span>
+                    </div>
+                    <div class="skill-group">
+                        <span class="label">Dev &amp; Automation</span>
+                        <span class="tag tech">Python scripting</span>
+                        <span class="tag tech">Node.js</span>
+                        <span class="tag tech">AI/LLM integration (OpenAI)</span>
+                        <span class="tag tech">Telegram Bot API</span>
+                        <span class="tag tech">HTML / CSS / Java</span>
+                        <span class="tag tech">Azure · Data Factory</span>
+                        <span class="tag tech">Git</span>
+                        <span class="tag tech">Power Automate</span>
+                    </div>
+                    <div class="skill-group">
+                        <span class="label">Business &amp; Soft</span>
+                        <span class="tag">Agile · Scrum</span>
+                        <span class="tag">CRM</span>
+                        <span class="tag">Requirements</span>
+                        <span class="tag">Stakeholder Comms</span>
+                        <span class="tag">Process Optimization</span>
+                        <span class="tag">Self-organized</span>
+                    </div>
+                `,
+                about: `
+                    <h2>About</h2>
+                    <p class="profile-text">
+                        I'm a Digital Business &amp; Data Science student based in Dubai who turns data and customer insights into streamlined processes and measurable performance gains. With hands-on experience in community management, e-commerce operations, and product development, I bridge the gap between business strategy and technical execution. I'm eager to apply my analytical toolkit and cross-functional communication skills to drive efficiency and deliver tangible results for a growth-focused team.
+                    </p>
+                    <div class="flex-wrap" style="margin-top:0.4rem;">
+                        <span class="tag accent">Data-driven</span>
+                        <span class="tag accent">Process automation</span>
+                        <span class="tag accent">BI &amp; dashboards</span>
+                        <span class="tag accent">Cross-functional</span>
+                        <span class="tag accent">Agile · Scrum</span>
+                        <span class="tag accent">8,000 wpm</span>
+                    </div>
+                    <div style="margin-top:0.8rem;">
+                        <span class="seeking">Open to full‑time · part‑time · internships</span>
+                    </div>
+                `,
+                exp: `
+                    <h2>Experience</h2>
+                    <div class="exp-item">
+                        <div class="exp-header">
+                            <span class="role">Co‑founder &amp; Product Lead</span>
+                            <span class="date">Mar 2023 – Present</span>
+                        </div>
+                        <div class="org">Flashnight Studios · GameDev</div>
+                        <ul class="bullets">
+                            <li>Led UI/UX and playtesting loops</li>
+                            <li>Integrated a CRM to segment players and track KPIs, boosting repeat sessions</li>
+                            <li>Orchestrated a cross‑functional team using Agile sprints and task boards</li>
+                            <li>Owned narrative design and contributed to front‑end code</li>
+                        </ul>
+                    </div>
+                    <div class="exp-item">
+                        <div class="exp-header">
+                            <span class="role">Community Manager &amp; Ad Sales</span>
+                            <span class="date">Current</span>
+                        </div>
+                        <div class="org">Dubai Youth Community · 5k+ Telegram</div>
+                        <ul class="bullets">
+                            <li>Grew and managed a 5,000‑member community with consistent engagement</li>
+                            <li>Closed ad partnerships with local businesses</li>
+                            <li>Built Telegram bots for ticket reservations and automated scheduling, cutting manual work by ~80%</li>
+                        </ul>
+                    </div>
+                    <div class="exp-item">
+                        <div class="exp-header">
+                            <span class="role">E‑commerce Operations</span>
+                            <span class="date">Mar 2021 – Aug 2025</span>
+                        </div>
+                        <div class="org">Freelance · Ozon, eBay, Avito</div>
+                        <ul class="bullets">
+                            <li>Managed listings, inventory, and pricing across 3 platforms simultaneously</li>
+                            <li>Maintained high seller ratings through diligent order tracking and customer care</li>
+                            <li>Analyzed sales data to spot trends and optimize assortment</li>
+                        </ul>
+                    </div>
+                    <div class="exp-item">
+                        <div class="exp-header">
+                            <span class="role">Business Analytics Assistant</span>
+                            <span class="date">May – Jul 2024</span>
+                        </div>
+                        <div class="org">University of Europe for Applied Sciences</div>
+                        <ul class="bullets">
+                            <li>Cleaned and structured student feedback data across multiple service categories</li>
+                            <li>Built interactive Excel &amp; Power BI dashboards to visualize KPIs and satisfaction</li>
+                            <li>Presented data‑driven recommendations that were adopted for curriculum improvements</li>
+                        </ul>
+                    </div>
+                    <div class="exp-item">
+                        <div class="exp-header">
+                            <span class="role">School President &amp; Student Council Head</span>
+                            <span class="date">Sep 2021 – Jul 2024</span>
+                        </div>
+                        <div class="org">Secondary School</div>
+                        <ul class="bullets">
+                            <li>Led council operations, organized events and charity drives, and served as the main liaison between students and administration</li>
+                        </ul>
+                    </div>
+                `,
+                edu: `
+                    <h2>Education</h2>
+                    <div class="edu-grid">
+                        <div class="edu-block">
+                            <p><strong>BSc Digital Business &amp; Data Science</strong></p>
+                            <p class="meta">University of Europe for Applied Sciences · Dubai, UAE</p>
+                            <div class="tags">
+                                <span class="tag">2024 – 2027</span>
+                                <span class="tag">GPA 3.1 / 4.0</span>
+                            </div>
+                        </div>
+                        <div class="edu-block">
+                            <p style="font-size:0.7rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:#3D6B7A; margin-bottom:0.3rem;">Coursework</p>
+                            <span class="tag">Digital Transformation</span>
+                            <span class="tag">Big Data</span>
+                            <span class="tag">Marketing &amp; Sales</span>
+                            <span class="tag">CRM</span>
+                            <span class="tag">Financial Accounting</span>
+                            <span class="tag">IT Platforms</span>
+                            <span class="tag">Agile PM</span>
+                            <span class="tag">Frontend</span>
+                            <span class="tag">IT Security</span>
+                            <span class="tag">AI</span>
+                            <span class="tag">Programming</span>
+                            <span class="tag">Quant &amp; Qual Methods</span>
+                        </div>
+                    </div>
+                `,
+                projects: `
+                    <h2>Projects</h2>
+                    <div class="project-item">
+                        <div class="project-header">
+                            <strong>Interactive CV / Resume</strong>
+                            <span class="stack">HTML · CSS · JavaScript · html2pdf</span>
+                        </div>
+                        Designed and developed a fully responsive, bilingual (EN/RU) CV with one-click PDF export. Implemented dynamic language switching, intersection-based reveal animations, and a clean, recruiter-optimized layout that adapts to print and screen.
+                    </div>
+                    <div class="project-item">
+                        <div class="project-header">
+                            <strong>Telegram Ticket Reservation Bot</strong>
+                            <span class="stack">Python · Bot API · SQLite</span>
+                        </div>
+                        End‑to‑end chatbot for event ticket reservations: users pick events, choose seats, get confirmations. Admin panel for capacity management and waitlist notifications. Zero manual ticket handling.
+                    </div>
+                    <div class="project-item">
+                        <div class="project-header">
+                            <strong>Automated Content Scheduler</strong>
+                            <span class="stack">Python · Telegram Bot API</span>
+                        </div>
+                        Bot that automates event announcements for a 5,000‑member channel. Eliminated manual posting and cut recurring admin work by ~80%.
+                    </div>
+                    <div class="project-item">
+                        <div class="project-header">
+                            <strong>Customer Satisfaction BI Dashboard</strong>
+                            <span class="stack">Power BI · Excel · Power Query</span>
+                        </div>
+                        End‑to‑end BI pipeline: collected survey data, cleaned in Power Query, built an interactive dashboard tracking NPS and satisfaction drivers. Identified 2 underperforming areas, recommendations adopted.
+                    </div>
+                    <div class="project-item">
+                        <div class="project-header">
+                            <strong>Sales Performance &amp; Assortment Analysis</strong>
+                            <span class="stack">SQL · PostgreSQL · Python · pandas</span>
+                        </div>
+                        Analyzed 12 months of transaction data to model seasonal demand and SKU performance. Delivered a report with assortment optimization recommendations and projected revenue impact.
+                    </div>
+                    <div class="project-item">
+                        <div class="project-header">
+                            <strong>E‑commerce Price Monitoring Script</strong>
+                            <span class="stack">Python · web scraping · pandas</span>
+                        </div>
+                        Built a Python script to monitor competitor pricing across marketplaces, aggregating data into structured reports. Automated a manual process, saving several hours per week.
+                    </div>
+                `,
+                contact: `
+                    <h2>Get in touch</h2>
+                    <div class="action-row">
+                        <a href="mailto:valyanovvva@gmail.com" class="btn">Email me</a>
+                        <button onclick="togglePopup()" class="btn ghost">Show contacts</button>
+                    </div>
+                    <div class="contact-popup" id="contactPopup">
+                        <p><strong>Phone</strong> &nbsp; +971 56 229 1034</p>
+                        <p><strong>Email</strong> &nbsp; <a href="mailto:valyanovvva@gmail.com">valyanovvva@gmail.com</a></p>
+                        <p><strong>Location</strong> &nbsp; Dubai, UAE</p>
+                        <button onclick="togglePopup()" class="btn secondary" style="margin-top:0.6rem;">Close</button>
+                    </div>
+                `
+            },
+            ru: {
+                profile: `
+                    <div class="profile-name">София Валянова</div>
+                    <div class="profile-title">Бакалавр цифрового бизнеса и науки о данных</div>
+                    <hr class="divider" />
+                    <div class="contact-line"><span class="label">Локация</span> Дубай, ОАЭ</div>
+                    <div class="contact-line"><span class="label">Телефон</span> +971 56 229 1034</div>
+                    <div class="contact-line"><span class="label">Email</span> <a href="mailto:valyanovvva@gmail.com">valyanovvva@gmail.com</a></div>
+                    <div class="contact-line"><span class="label">Виза</span> Студенческая · ОАЭ</div>
+                    <hr class="divider" />
+                    <div class="skill-group">
+                        <span class="label">Ключевые черты</span>
+                        <span class="tag accent">Инновационность</span>
+                        <span class="tag accent">Адаптивность</span>
+                        <span class="tag accent">Любознательность</span>
+                        <span class="tag accent">Стратегичность</span>
+                        <span class="tag accent">Убедительность</span>
+                    </div>
+                    <div class="skill-group">
+                        <span class="label">Языки</span>
+                        <div class="lang-item"><span>Английский</span><span class="level">C1+ · Свободно</span></div>
+                        <div class="lang-item"><span>Русский</span><span class="level">Родной</span></div>
+                        <div class="lang-item"><span>Татарский</span><span class="level">Базовый · Происхождение</span></div>
+                    </div>
+                    <div class="skill-group">
+                        <span class="label">Коротко</span>
+                        <div style="font-size:0.82rem; color:#1E2B38; line-height:1.6;">
+                            Родилась в России · Резидент ОАЭ<br>
+                            Татарские корни · ЕС (Болгария)
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <span class="label">Интересы</span>
+                        <div class="interests-grid" id="interests-container"></div>
+                    </div>
+                `,
+                skills_side: `
+                    <h2>Экспертиза</h2>
+                    <div class="skill-group">
+                        <span class="label">Данные и аналитика</span>
+                        <span class="tag tech">Python · pandas</span>
+                        <span class="tag tech">SQL · PostgreSQL</span>
+                        <span class="tag tech">Power BI</span>
+                        <span class="tag tech">Визуализация</span>
+                        <span class="tag tech">Excel · VBA</span>
+                        <span class="tag tech">ETL</span>
+                    </div>
+                    <div class="skill-group">
+                        <span class="label">Разработка и автоматизация</span>
+                        <span class="tag tech">Python скрипты</span>
+                        <span class="tag tech">Node.js</span>
+                        <span class="tag tech">AI/LLM интеграция (OpenAI)</span>
+                        <span class="tag tech">Telegram Bot API</span>
+                        <span class="tag tech">HTML / CSS / Java</span>
+                        <span class="tag tech">Azure · Data Factory</span>
+                        <span class="tag tech">Git</span>
+                        <span class="tag tech">Power Automate</span>
+                    </div>
+                    <div class="skill-group">
+                        <span class="label">Бизнес и софт-скиллы</span>
+                        <span class="tag">Agile · Scrum</span>
+                        <span class="tag">CRM</span>
+                        <span class="tag">Сбор требований</span>
+                        <span class="tag">Коммуникация</span>
+                        <span class="tag">Оптимизация процессов</span>
+                        <span class="tag">Самоорганизация</span>
+                    </div>
+                `,
+                about: `
+                    <h2>Обо мне</h2>
+                    <p class="profile-text">
+                        Я студентка направления «Цифровой бизнес и наука о данных» в Дубае. Превращаю данные и обратную связь от клиентов в оптимизированные процессы и измеримые результаты. Имею практический опыт в управлении сообществами, операциях на маркетплейсах и разработке продуктов — это помогает мне связывать бизнес-стратегию с технической реализацией. Готова применить свои аналитические навыки и коммуникативные способности, чтобы повысить эффективность и приносить реальную пользу растущей команде.
+                    </p>
+                    <div class="flex-wrap" style="margin-top:0.4rem;">
+                        <span class="tag accent">Data-driven</span>
+                        <span class="tag accent">Автоматизация</span>
+                        <span class="tag accent">BI и дашборды</span>
+                        <span class="tag accent">Кросс-функциональность</span>
+                        <span class="tag accent">Agile · Scrum</span>
+                        <span class="tag accent">8 000 зн/мин</span>
+                    </div>
+                    <div style="margin-top:0.8rem;">
+                        <span class="seeking">Открыта к полной, частичной занятости и стажировкам</span>
+                    </div>
+                `,
+                exp: `
+                    <h2>Опыт</h2>
+                    <div class="exp-item">
+                        <div class="exp-header">
+                            <span class="role">Сооснователь и продакт-лид</span>
+                            <span class="date">Мар 2023 – наст. вр.</span>
+                        </div>
+                        <div class="org">Flashnight Studios · GameDev</div>
+                        <ul class="bullets">
+                            <li>Руководила UI/UX и плейтестингом</li>
+                            <li>Внедрила CRM для сегментации игроков и отслеживания KPI, повысив повторные сессии</li>
+                            <li>Координировала кросс‑функциональную команду через Agile‑спринты</li>
+                            <li>Отвечала за нарратив и участвовала во фронтенд‑разработке</li>
+                        </ul>
+                    </div>
+                    <div class="exp-item">
+                        <div class="exp-header">
+                            <span class="role">Комьюнити-менеджер и реклама</span>
+                            <span class="date">Текущий</span>
+                        </div>
+                        <div class="org">Dubai Youth Community · 5k+ Telegram</div>
+                        <ul class="bullets">
+                            <li>Развивала сообщество на 5 000 человек с высокой вовлечённостью</li>
+                            <li>Заключала рекламные партнёрства с локальным бизнесом</li>
+                            <li>Разработала ботов для бронирования и автоматического планирования, сократив ручную работу на ~80%</li>
+                        </ul>
+                    </div>
+                    <div class="exp-item">
+                        <div class="exp-header">
+                            <span class="role">Операции на маркетплейсах</span>
+                            <span class="date">Мар 2021 – Авг 2025</span>
+                        </div>
+                        <div class="org">Фриланс · Ozon, eBay, Avito</div>
+                        <ul class="bullets">
+                            <li>Управляла листингами, остатками и ценами на 3 платформах одновременно</li>
+                            <li>Поддерживала высокий рейтинг продавца через качественный сервис</li>
+                            <li>Анализировала продажи для выявления трендов и оптимизации ассортимента</li>
+                        </ul>
+                    </div>
+                    <div class="exp-item">
+                        <div class="exp-header">
+                            <span class="role">Бизнес-аналитика</span>
+                            <span class="date">Май – Июл 2024</span>
+                        </div>
+                        <div class="org">University of Europe for Applied Sciences</div>
+                        <ul class="bullets">
+                            <li>Собирала и структурировала данные обратной связи студентов</li>
+                            <li>Строила дашборды в Excel и Power BI для визуализации KPI</li>
+                            <li>Представила рекомендации в рамках учебной программы</li>
+                        </ul>
+                    </div>
+                    <div class="exp-item">
+                        <div class="exp-header">
+                            <span class="role">Президент школы и глава совета</span>
+                            <span class="date">Сен 2021 – Июл 2024</span>
+                        </div>
+                        <div class="org">Средняя школа</div>
+                        <ul class="bullets">
+                            <li>Руководила советом, организовывала мероприятия и благотворительные акции, была связующим звеном между учениками и администрацией</li>
+                        </ul>
+                    </div>
+                `,
+                edu: `
+                    <h2>Образование</h2>
+                    <div class="edu-grid">
+                        <div class="edu-block">
+                            <p><strong>Бакалавр цифрового бизнеса и науки о данных</strong></p>
+                            <p class="meta">University of Europe for Applied Sciences · Дубай, ОАЭ</p>
+                            <div class="tags">
+                                <span class="tag">2024 – 2027</span>
+                                <span class="tag">GPA 3.1 / 4.0</span>
+                            </div>
+                        </div>
+                        <div class="edu-block">
+                            <p style="font-size:0.7rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:#3D6B7A; margin-bottom:0.3rem;">Ключевые курсы</p>
+                            <span class="tag">Цифровая трансформация</span>
+                            <span class="tag">Большие данные</span>
+                            <span class="tag">Маркетинг и продажи</span>
+                            <span class="tag">CRM</span>
+                            <span class="tag">Финансовый учёт</span>
+                            <span class="tag">IT-платформы</span>
+                            <span class="tag">Agile PM</span>
+                            <span class="tag">Фронтенд</span>
+                            <span class="tag">IT-безопасность</span>
+                            <span class="tag">ИИ</span>
+                            <span class="tag">Программирование</span>
+                            <span class="tag">Количественные и качественные методы</span>
+                        </div>
+                    </div>
+                `,
+                projects: `
+                    <h2>Проекты</h2>
+                    <div class="project-item">
+                        <div class="project-header">
+                            <strong>Интерактивное CV / Резюме</strong>
+                            <span class="stack">HTML · CSS · JavaScript · html2pdf</span>
+                        </div>
+                        Разработала полностью адаптивное, двуязычное (EN/RU) резюме с экспортом в PDF. Реализовала динамическое переключение языков, анимацию при появлении и чистый, оптимизированный для рекрутеров дизайн, который адаптируется под печать и экран.
+                    </div>
+                    <div class="project-item">
+                        <div class="project-header">
+                            <strong>Telegram-бот для бронирования билетов</strong>
+                            <span class="stack">Python · Bot API · SQLite</span>
+                        </div>
+                        Чат‑бот для бронирования билетов на мероприятия: выбор событий, мест, подтверждение. Админ‑панель для управления вместимостью и уведомлениями. Полностью исключила ручную обработку.
+                    </div>
+                    <div class="project-item">
+                        <div class="project-header">
+                            <strong>Бот для автоматического планирования</strong>
+                            <span class="stack">Python · Telegram Bot API</span>
+                        </div>
+                        Бот для автоматической публикации анонсов в канале на 5 000 подписчиков. Исключила ручной постинг, сократив нагрузку на ~80%.
+                    </div>
+                    <div class="project-item">
+                        <div class="project-header">
+                            <strong>BI-дашборд удовлетворённости клиентов</strong>
+                            <span class="stack">Power BI · Excel · Power Query</span>
+                        </div>
+                        Сквозной BI‑пайплайн: сбор данных, очистка в Power Query, интерактивный дашборд с NPS и драйверами удовлетворённости. Выявила 2 зоны для улучшения — рекомендации приняты.
+                    </div>
+                    <div class="project-item">
+                        <div class="project-header">
+                            <strong>Анализ продаж и ассортимента</strong>
+                            <span class="stack">SQL · PostgreSQL · Python · pandas</span>
+                        </div>
+                        Проанализировала 12 месяцев транзакций для моделирования сезонного спроса и эффективности SKU. Подготовила отчёт с рекомендациями по оптимизации ассортимента и прогнозом влияния на выручку.
+                    </div>
+                    <div class="project-item">
+                        <div class="project-header">
+                            <strong>Скрипт мониторинга цен</strong>
+                            <span class="stack">Python · веб-скрейпинг · pandas</span>
+                        </div>
+                        Разработала скрипт для отслеживания цен конкурентов на маркетплейсах с агрегацией данных в отчёты. Автоматизировала ручной процесс, сэкономив несколько часов в неделю.
+                    </div>
+                `,
+                contact: `
+                    <h2>Контакты</h2>
+                    <div class="action-row">
+                        <a href="mailto:valyanovvva@gmail.com" class="btn">Написать</a>
+                        <button onclick="togglePopup()" class="btn ghost">Показать контакты</button>
+                    </div>
+                    <div class="contact-popup" id="contactPopup">
+                        <p><strong>Телефон</strong> &nbsp; +971 56 229 1034</p>
+                        <p><strong>Email</strong> &nbsp; <a href="mailto:valyanovvva@gmail.com">valyanovvva@gmail.com</a></p>
+                        <p><strong>Локация</strong> &nbsp; Дубай, ОАЭ</p>
+                        <button onclick="togglePopup()" class="btn secondary" style="margin-top:0.6rem;">Закрыть</button>
+                    </div>
+                `
+            }
+        };
+
+        // ── Render Function ──
         let currentLang = 'en';
 
-        const cards = document.querySelectorAll('.card');
-
-        function setLanguage(lang) {
+        function render(lang) {
             currentLang = lang;
-            cards.forEach(card => {
-                const content = card.getAttribute('data-' + lang);
-                if (content) {
-                    card.innerHTML = content;
-                }
-            });
-            toggleBtn.textContent = lang === 'en' ? 'Russian' : 'English';
-            cards.forEach(c => c.classList.remove('visible'));
+            const data = content[lang];
+            const interests = interestsData[lang];
+
+            document.getElementById('card-profile').innerHTML = data.profile;
+            document.getElementById('card-skills-side').innerHTML = data.skills_side;
+            document.getElementById('card-about').innerHTML = data.about;
+            document.getElementById('card-exp').innerHTML = data.exp;
+            document.getElementById('card-edu').innerHTML = data.edu;
+            document.getElementById('card-projects').innerHTML = data.projects;
+            document.getElementById('card-contact').innerHTML = data.contact;
+
+            // Inject interests
+            const container = document.getElementById('interests-container');
+            if (container) {
+                container.innerHTML = interests.map(i => `<span class="tag interest">${i}</span>`).join('');
+            }
+
+            document.getElementById('langToggle').textContent = lang === 'en' ? 'Русский' : 'English';
+
+            // Reset visibility
+            document.querySelectorAll('.card, .card-side').forEach(el => el.classList.remove('visible'));
             setTimeout(() => {
-                observer.disconnect();
-                cards.forEach(c => {
-                    const rect = c.getBoundingClientRect();
-                    if (rect.top < window.innerHeight - 100) {
-                        c.classList.add('visible');
-                    }
+                document.querySelectorAll('.card, .card-side').forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top < window.innerHeight + 80) el.classList.add('visible');
                 });
-                cards.forEach(c => observer.observe(c));
-            }, 50);
+                initObserver();
+            }, 60);
         }
 
-        toggleBtn.addEventListener('click', function() {
-            const newLang = (currentLang === 'en') ? 'ru' : 'en';
-            setLanguage(newLang);
+        document.getElementById('langToggle').addEventListener('click', () => {
+            render(currentLang === 'en' ? 'ru' : 'en');
         });
 
-        // === ПЛАВНОЕ ПОЯВЛЕНИЕ ===
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
+        // ── Intersection Observer ──
+        let observer;
+
+        function initObserver() {
+            if (observer) observer.disconnect();
+            observer = new IntersectionObserver((entries) => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) e.target.classList.add('visible');
+                });
+            }, { threshold: 0.08 });
+            document.querySelectorAll('.card, .card-side').forEach(el => observer.observe(el));
+        }
+
+        // ── Popup Toggle ──
+        function togglePopup() {
+            const p = document.getElementById('contactPopup');
+            if (p) p.style.display = p.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // ── PDF Download ──
+        function downloadPDF() {
+            document.querySelectorAll('.card, .card-side').forEach(el => {
+                el.style.opacity = '1';
+                el.style.transform = 'none';
             });
-        }, { threshold: 0.15 });
 
-        setLanguage('en');
-        cards.forEach(card => observer.observe(card));
-    })();
+            const element = document.getElementById('cvGrid');
+            const opt = {
+                margin: [0.35, 0.4, 0.35, 0.4],
+                filename: 'Sofia_Valyanova_CV.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true, logging: false, scrollY: 0, windowWidth: 1100 },
+                jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' },
+                pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+            };
 
-    // === ФУНКЦИЯ ДЛЯ СКАЧИВАНИЯ PDF ===
-    function downloadPDF() {
-        const element = document.getElementById('content');
-        const opt = {margin: 0.5,
-            filename: 'Sofia_Valyanova_CV.pdf',
-            image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { scale: 2 },
-            jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
-        };
-        html2pdf().set(opt).from(element).save();
-    }
-</script>
+            html2pdf().set(opt).from(element).save().then(() => {
+                document.querySelectorAll('.card, .card-side').forEach(el => {
+                    el.style.opacity = '';
+                    el.style.transform = '';
+                });
+            });
+        }
+
+        // ── Expose global functions ──
+        window.togglePopup = togglePopup;
+        window.downloadPDF = downloadPDF;
+
+        // ── Initial Render ──
+        render('en');
+    </script>
+
+</body>
+</html>
 </body>
 </html>
