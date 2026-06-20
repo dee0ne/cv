@@ -491,40 +491,50 @@
         }
     }
 
-    /* ── PDF export overrides ── */
-    body.pdf-export .cv-grid {
-        display: block !important;
-        max-width: 100%;
-    }
-    body.pdf-export .sidebar,
-    body.pdf-export .main {
-        display: block !important;
-        width: 100%;
-    }
-    body.pdf-export .card,
-    body.pdf-export .card-side {
-        padding: 0.6rem 0.9rem !important;
-        margin-bottom: 0.5rem !important;
-        box-shadow: none !important;
-        border: 1px solid #e0ddd8;
-        border-radius: 12px !important;
-        opacity: 1 !important;
-        transform: none !important;
-    }
-    body.pdf-export .exp-item,
-    body.pdf-export .project-item {
-        border-left-width: 3px !important;
-    }
-    body.pdf-export .toolbar {
-        display: none !important;
-    }
-    body.pdf-export .contact-popup {
-        display: none !important;
-    }
-    body.pdf-export .container {
-        max-width: 100%;
-        padding: 0;
-    }
+   /* ── PDF export overrides ── */
+body.pdf-export .container {
+    max-width: 100%;
+    padding: 0.1in;
+    margin: 0 auto;
+}
+
+body.pdf-export .cv-grid {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+}
+
+body.pdf-export .sidebar,
+body.pdf-export .main {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+}
+
+body.pdf-export .card,
+body.pdf-export .card-side {
+    padding: 0.5rem 0.8rem !important;
+    margin-bottom: 0.4rem !important;
+    box-shadow: none !important;
+    border: 1px solid #e0ddd8;
+    border-radius: 10px !important;
+    opacity: 1 !important;
+    transform: none !important;
+    width: 100% !important;
+}
+
+body.pdf-export .exp-item,
+body.pdf-export .project-item {
+    border-left-width: 3px !important;
+}
+
+body.pdf-export .toolbar {
+    display: none !important;
+}
+body.pdf-export .contact-popup {
+    display: none !important;
+}
 
     /* ── Print styles (fallback) ── */
     @media print {
@@ -1412,25 +1422,28 @@
         }
 
         // ── PDF Download ──
-        function downloadPDF() {
-            document.body.classList.add('pdf-export');
+function downloadPDF() {
+    document.body.classList.add('pdf-export');
 
-            document.querySelectorAll('.card, .card-side').forEach(el => {
-                el.style.opacity = '1';
-                el.style.transform = 'none';
+    document.querySelectorAll('.card, .card-side').forEach(el => {
+        el.style.opacity = '1';
+        el.style.transform = 'none';
     });
 
     const element = document.getElementById('cvGrid');
     const opt = {
-        margin: [0.4, 0.4, 0.4, 0.4],
+        margin: [0.35, 0.35, 0.35, 0.35],
         filename: 'Sofia_Valyanova_CV.pdf',
         image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { 
-            scale: 2, 
-            useCORS: true, 
-            logging: false, 
-            scrollY: 0, 
-            windowWidth: 900
+        html2canvas: {
+            scale: 2,
+            useCORS: true,
+            logging: false,
+            scrollY: 0,
+            windowWidth: 1060,      // matches container max-width
+            width: 1060,
+            x: 0,
+            y: 0
         },
         jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' },
         pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
