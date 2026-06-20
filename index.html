@@ -4,8 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sofia Valyanova · CV</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
@@ -30,7 +28,7 @@
             margin: 0 auto;
         }
 
-        /* ── Toolbar ── */
+        /* ── Language toggle ── */
         .toolbar {
             display: flex;
             justify-content: flex-end;
@@ -58,15 +56,6 @@
         }
         .toolbar .lang-btn:hover {
             background: #0F1A24;
-            transform: scale(1.02);
-        }
-
-        .toolbar .pdf-btn {
-            background: #D98A44;
-            color: #1E2B38;
-        }
-        .toolbar .pdf-btn:hover {
-            background: #C47A34;
             transform: scale(1.02);
         }
 
@@ -465,71 +454,7 @@
             }
         }
 
-        /* ── PDF Export Overrides ── */
-        body.pdf-mode .container {
-            max-width: 100%;
-            padding: 0.1in 0.15in;
-            margin: 0 auto;
-        }
-
-        body.pdf-mode .cv-grid {
-            display: block !important;
-            width: 100% !important;
-            max-width: 100% !important;
-            margin: 0 auto !important;
-        }
-
-        body.pdf-mode .sidebar,
-        body.pdf-mode .main {
-            display: block !important;
-            width: 100% !important;
-            margin: 0 auto !important;
-        }
-
-        body.pdf-mode .card,
-        body.pdf-mode .card-side {
-            padding: 0.5rem 0.8rem !important;
-            margin-bottom: 0.4rem !important;
-            box-shadow: none !important;
-            border: 1px solid #e0ddd8 !important;
-            border-radius: 8px !important;
-            opacity: 1 !important;
-            transform: none !important;
-            width: 100% !important;
-            page-break-inside: avoid;
-        }
-
-        body.pdf-mode .exp-item,
-        body.pdf-mode .project-item {
-            border-left-width: 3px !important;
-            padding: 0.5rem 0.8rem !important;
-        }
-
-        body.pdf-mode .toolbar {
-            display: none !important;
-        }
-        body.pdf-mode .contact-popup {
-            display: none !important;
-        }
-
-        body.pdf-mode .exp-item .bullets li {
-            font-size: 0.78rem !important;
-        }
-        body.pdf-mode .project-item {
-            font-size: 0.78rem !important;
-        }
-        body.pdf-mode .profile-text {
-            font-size: 0.85rem !important;
-        }
-        body.pdf-mode .tag {
-            font-size: 0.65rem !important;
-            padding: 0.05rem 0.6rem !important;
-        }
-        body.pdf-mode .contact-line {
-            font-size: 0.75rem !important;
-        }
-
-        /* ── Print fallback ── */
+        /* ── Print / PDF overrides (browser print) ── */
         @media print {
             .toolbar {
                 display: none !important;
@@ -560,23 +485,53 @@
             .contact-popup {
                 display: none !important;
             }
+            .exp-item .bullets li {
+                font-size: 0.78rem !important;
+            }
+            .project-item {
+                font-size: 0.78rem !important;
+            }
+            .profile-text {
+                font-size: 0.85rem !important;
+            }
+            .tag {
+                font-size: 0.65rem !important;
+                padding: 0.05rem 0.6rem !important;
+            }
+            .contact-line {
+                font-size: 0.75rem !important;
+            }
         }
 
-        /* ── Utilities ── */
         .flex-wrap {
             display: flex;
             flex-wrap: wrap;
             gap: 0.3rem;
         }
+        .print-note {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: #f8f4ee;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            text-align: center;
+            color: #4a7a8a;
+            border: 1px dashed #3d6b7a;
+        }
+        @media print {
+            .print-note {
+                display: none !important;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <div class="container" id="mainContainer">
-        <!-- Toolbar -->
+    <div class="container">
+
+        <!-- Toolbar (only language toggle) -->
         <div class="toolbar">
             <button class="lang-btn" id="langToggle">Русский</button>
-            <button class="pdf-btn" onclick="downloadPDF()">Download PDF</button>
         </div>
 
         <!-- CV Grid -->
@@ -790,9 +745,9 @@
                     <div class="project-item">
                         <div class="project-header">
                             <strong>Interactive CV / Resume</strong>
-                            <span class="stack">HTML · CSS · JavaScript · html2pdf</span>
+                            <span class="stack">HTML · CSS · JavaScript</span>
                         </div>
-                        Designed and developed a fully responsive, bilingual (EN/RU) CV with one-click PDF export. Implemented dynamic language switching, intersection-based reveal animations, and a clean, recruiter-optimized layout that adapts to print and screen.
+                        Designed and developed a fully responsive, bilingual (EN/RU) CV with a clean, recruiter-optimized layout that adapts to print and screen. Implemented dynamic language switching and intersection-based reveal animations.
                     </div>
 
                     <div class="project-item">
@@ -853,6 +808,12 @@
 
             </div><!-- /main -->
         </div><!-- /cv-grid -->
+
+        <!-- Print instruction note (hidden when printing) -->
+        <div class="print-note">
+            <strong>📄 To save as PDF:</strong> Use your browser's <strong>Print</strong> (Ctrl+P / Cmd+P) and choose <strong>"Save as PDF"</strong> as the destination.
+        </div>
+
     </div><!-- /container -->
 
     <script>
@@ -1055,16 +1016,16 @@
                     <div class="project-item">
                         <div class="project-header">
                             <strong>Interactive CV / Resume</strong>
-                            <span class="stack">HTML · CSS · JavaScript · html2pdf</span>
+                            <span class="stack">HTML · CSS · JavaScript</span>
                         </div>
-                        Designed and developed a fully responsive, bilingual (EN/RU) CV with one-click PDF export. Implemented dynamic language switching, intersection-based reveal animations, and a clean, recruiter-optimized layout that adapts to print and screen.
+                        Designed and developed a fully responsive, bilingual (EN/RU) CV with a clean, recruiter-optimized layout that adapts to print and screen. Implemented dynamic language switching and intersection-based reveal animations.
                     </div>
                     <div class="project-item">
                         <div class="project-header">
                             <strong>Telegram Ticket Reservation Bot</strong>
                             <span class="stack">Python · Bot API · SQLite</span>
                         </div>
-                        End‑to‑end chatbot for event ticket reservations: users pick events, choose seats, get confirmations. Admin panel for capacity management and waitlist notifications. Zero manual ticket handling.
+                        End‑to‑end chatbot for event ticket reservations: users pick events, choose seats, get confirmations. Admin panel for capacity management and waitlist notifications. Reduced manual ticket handling to zero.
                     </div>
                     <div class="project-item">
                         <div class="project-header">
@@ -1289,9 +1250,9 @@
                     <div class="project-item">
                         <div class="project-header">
                             <strong>Интерактивное CV / Резюме</strong>
-                            <span class="stack">HTML · CSS · JavaScript · html2pdf</span>
+                            <span class="stack">HTML · CSS · JavaScript</span>
                         </div>
-                        Разработала полностью адаптивное, двуязычное (EN/RU) резюме с экспортом в PDF. Реализовала динамическое переключение языков, анимацию при появлении и чистый, оптимизированный для рекрутеров дизайн, который адаптируется под печать и экран.
+                        Разработала полностью адаптивное, двуязычное (EN/RU) резюме с чистым, оптимизированным для рекрутеров дизайном, который адаптируется под печать и экран. Реализовала динамическое переключение языков и анимацию при появлении.
                     </div>
                     <div class="project-item">
                         <div class="project-header">
@@ -1345,7 +1306,7 @@
             }
         };
 
-        // ── Render Function ──
+        // ── Render ──
         let currentLang = 'en';
 
         function render(lang) {
@@ -1399,49 +1360,11 @@
             if (p) p.style.display = p.style.display === 'block' ? 'none' : 'block';
         }
 
-        // ── PDF Download (optimized for any device) ──
-        function downloadPDF() {
-            // Add PDF mode class to trigger condensed styles
-            document.body.classList.add('pdf-mode');
-
-            // Force all cards visible
-            document.querySelectorAll('.card, .card-side').forEach(el => {
-                el.style.opacity = '1';
-                el.style.transform = 'none';
-            });
-
-            const element = document.getElementById('cvGrid');
-
-            // Capture at A4 width (794px at 96dpi) so scaling is consistent
-            const opt = {
-                margin:        [0.3, 0.3, 0.3, 0.3],
-                filename:      'Sofia_Valyanova_CV.pdf',
-                image:         { type: 'jpeg', quality: 0.98 },
-                html2canvas:   {
-                    scale:      2,
-                    useCORS:    true,
-                    logging:    false,
-                    scrollY:    0,
-                    windowWidth: 794,
-                    width:      794
-                },
-                jsPDF:         { unit: 'in', format: 'a4', orientation: 'portrait' },
-                pagebreak:     { mode: ['avoid-all', 'css', 'legacy'] }
-            };
-
-            html2pdf().set(opt).from(element).save().then(() => {
-                document.body.classList.remove('pdf-mode');
-                document.querySelectorAll('.card, .card-side').forEach(el => {
-                    el.style.opacity = '';
-                    el.style.transform = '';
-                });
-            });
-        }
-
         window.togglePopup = togglePopup;
-        window.downloadPDF = downloadPDF;
 
+        // ── Initial render ──
         render('en');
     </script>
+
 </body>
 </html>
