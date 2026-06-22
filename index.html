@@ -3,1371 +3,1430 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sofia Valyanova · CV</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <title>Sofiia Valyanova · BSc Digital Business & Data Science</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <style>
-        /* ── Reset & Base ── */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background: #F3F0EB;
-            color: #1E2B38;
-            padding: 1.5rem 1rem;
+            font-family: 'Outfit', sans-serif;
+            background: #0a0a1a;
+            color: #f0f0f0;
+            padding: 1.2rem 1rem;
             line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            transition: background 0.3s;
+            overflow-x: hidden;
         }
-
+        body[lang="ru"] {
+            font-family: 'Nunito', 'Outfit', sans-serif;
+        }
         .container {
-            max-width: 1060px;
+            max-width: 1100px;
             margin: 0 auto;
         }
-
-        /* ── Language toggle ── */
-        .toolbar {
-            display: flex;
-            justify-content: flex-end;
-            gap: 0.6rem;
-            margin-bottom: 1.4rem;
-            flex-wrap: wrap;
-        }
-
-        .toolbar button {
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-            font-size: 0.82rem;
-            padding: 0.5rem 1.4rem;
-            border: none;
-            border-radius: 60px;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            box-shadow: 0 4px 14px rgba(30, 43, 56, 0.06);
-            letter-spacing: 0.01em;
-        }
-
-        .toolbar .lang-btn {
-            background: #1E2B38;
-            color: #FCFAF7;
-        }
-        .toolbar .lang-btn:hover {
-            background: #0F1A24;
-            transform: scale(1.02);
-        }
-
-        /* ── Grid ── */
-        .cv-grid {
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 1.5rem;
-            background: transparent;
-        }
-
-        /* ── Cards ── */
-        .card,
-        .card-side {
-            background: #FFFFFF;
-            border-radius: 22px;
-            padding: 1.6rem 1.8rem;
-            box-shadow: 0 8px 28px rgba(30, 43, 56, 0.05);
-            transition: opacity 0.55s ease, transform 0.5s ease;
+        .vibe-overlay {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background: linear-gradient(120deg, rgba(255, 77, 148, 0.15), rgba(124, 77, 255, 0.15), rgba(255, 77, 148, 0.15));
+            background-size: 300% 300%;
             opacity: 0;
-            transform: translateY(18px);
+            transition: opacity 1s ease;
         }
-
-        .card.visible,
-        .card-side.visible {
+        .vibe-overlay.active {
             opacity: 1;
-            transform: translateY(0);
+            animation: vibeDance 4s ease-in-out infinite alternate;
         }
-
-        .sidebar {
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
+        @keyframes vibeDance {
+            0% { background-position: 0% 50%; background-size: 300% 300%; }
+            50% { background-position: 100% 50%; background-size: 400% 400%; }
+            100% { background-position: 0% 50%; background-size: 300% 300%; }
         }
-        .sidebar .card-side {
-            padding: 1.6rem 1.4rem;
-        }
-
-        /* ── Typography ── */
-        h2 {
-            font-size: 0.72rem;
-            font-weight: 700;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: #3D6B7A;
-            border-bottom: 2px solid #EEEAE4;
-            padding-bottom: 0.4rem;
-            margin-bottom: 1rem;
-        }
-
-        .profile-name {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #1E2B38;
-            letter-spacing: -0.02em;
-        }
-
-        .profile-title {
-            font-size: 0.85rem;
-            color: #4A7A8A;
-            margin-top: 0.1rem;
-            font-weight: 400;
-        }
-
-        .contact-line {
-            display: flex;
-            align-items: baseline;
-            gap: 0.5rem;
-            font-size: 0.82rem;
-            color: #1E2B38;
-            margin: 0.25rem 0;
-            padding: 0.2rem 0;
-        }
-
-        .contact-line .label {
-            font-weight: 500;
-            color: #4A7A8A;
-            min-width: 60px;
-            font-size: 0.72rem;
-            letter-spacing: 0.04em;
-        }
-
-        .contact-line a {
-            color: #1E2B38;
-            text-decoration: none;
-            border-bottom: 1px dotted #C4B8AA;
-        }
-        .contact-line a:hover {
-            color: #D98A44;
-            border-bottom-color: #D98A44;
-        }
-
-        .divider {
-            border: none;
-            border-top: 2px solid #EEEAE4;
-            margin: 0.8rem 0 1rem;
-        }
-
-        .skill-group {
-            margin-bottom: 0.8rem;
-        }
-        .skill-group .label {
-            font-size: 0.65rem;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: #3D6B7A;
-            margin-bottom: 0.3rem;
-            display: block;
-        }
-
-        .lang-item {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.85rem;
-            padding: 0.15rem 0;
-            border-bottom: 1px solid #F0ECE4;
-        }
-        .lang-item .level {
-            color: #4A7A8A;
-            font-weight: 500;
-            font-size: 0.78rem;
-        }
-
-        .interests-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.3rem;
-            margin-top: 0.2rem;
-        }
-
-        .tag {
-            display: inline-block;
-            background: #EEEAE4;
-            padding: 0.15rem 0.9rem;
-            border-radius: 30px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: #1E2B38;
-            margin: 0.15rem 0.2rem 0.15rem 0;
-            letter-spacing: 0.01em;
-        }
-
-        .tag.tech {
-            background: #E4E9ED;
-            color: #1E3A4A;
-        }
-
-        .tag.accent {
-            background: #F2E8DB;
-            color: #A66C2E;
-        }
-
-        .tag.interest {
-            background: #E8F0F2;
-            color: #2A5A6A;
-        }
-
-        .seeking {
-            font-size: 0.82rem;
-            color: #D98A44;
-            font-weight: 600;
-            margin-top: 0.5rem;
-            letter-spacing: 0.01em;
-            background: #F8F4EE;
-            display: inline-block;
-            padding: 0.2rem 1rem;
-            border-radius: 40px;
-        }
-
-        .profile-text {
-            font-size: 0.92rem;
-            line-height: 1.7;
-            color: #1E2B38;
-            margin-bottom: 0.6rem;
-        }
-        .profile-text strong {
-            color: #0F1A24;
-        }
-
-        /* Experience */
-        .exp-item {
-            background: #F8F6F3;
-            border-radius: 14px;
-            padding: 0.9rem 1.2rem;
-            margin-bottom: 0.7rem;
-            border-left: 4px solid #D98A44;
-        }
-
-        .exp-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            flex-wrap: wrap;
-            gap: 0.2rem 0.6rem;
-        }
-        .exp-header .role {
-            font-weight: 700;
-            color: #1E2B38;
-            font-size: 0.92rem;
-        }
-        .exp-header .date {
-            font-size: 0.72rem;
-            font-weight: 600;
-            color: #4A7A8A;
-            white-space: nowrap;
-            background: #EDE8E0;
-            padding: 0.05rem 0.8rem;
-            border-radius: 30px;
-        }
-        .exp-item .org {
-            color: #4A7A8A;
-            font-size: 0.82rem;
-            margin: 0.1rem 0 0.35rem;
-            font-weight: 500;
-        }
-        .exp-item .bullets {
-            list-style: none;
-            padding: 0;
-        }
-        .exp-item .bullets li {
-            padding-left: 1.1em;
+        .container,
+        .header,
+        .card,
+        footer {
             position: relative;
-            font-size: 0.85rem;
-            color: #1E2B38;
-            margin-bottom: 0.15rem;
-            line-height: 1.55;
+            z-index: 1;
         }
-        .exp-item .bullets li::before {
-            content: "◆";
-            position: absolute;
-            left: 0;
-            color: #D98A44;
-            font-size: 0.5rem;
-            top: 0.45rem;
+        :root {
+            --neon: #ff4d94;
+            --neon-glow: rgba(255, 77, 148, 0.35);
+            --secondary: #7c4dff;
+            --secondary-glow: rgba(124, 77, 255, 0.25);
+            --glass-bg: rgba(15, 15, 35, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.06);
+            --glass-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
+            --gradient-bg: linear-gradient(145deg, rgba(255, 77, 148, 0.08), rgba(124, 77, 255, 0.08));
         }
-
-        /* Projects */
-        .project-item {
-            background: #F8F6F3;
-            border-radius: 14px;
-            padding: 0.9rem 1.2rem;
-            margin-bottom: 0.7rem;
-            border-left: 4px solid #3D6B7A;
-            font-size: 0.85rem;
-            line-height: 1.6;
+        .greeting-logo {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #fff;
+            background: linear-gradient(90deg, var(--neon), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.6rem;
+            display: inline-block;
+            padding: 0 0.2rem;
+            min-height: 3.5rem;
+            border-right: 3px solid var(--neon);
+            white-space: nowrap;
+            overflow: hidden;
         }
-        .project-header {
+        .greeting-logo.typing {
+            border-right: 3px solid var(--neon);
+            animation: blinkCursor 0.7s step-end infinite;
+        }
+        @keyframes blinkCursor {
+            50% {
+                border-color: transparent;
+            }
+        }
+        .header {
             display: flex;
             justify-content: space-between;
-            align-items: baseline;
-            flex-wrap: wrap;
-            gap: 0.2rem 0.6rem;
-            margin-bottom: 0.2rem;
-        }
-        .project-item strong {
-            color: #1E2B38;
-            font-size: 0.9rem;
-        }
-        .project-item .stack {
-            font-size: 0.68rem;
-            color: #3D6B7A;
-            font-weight: 600;
-            letter-spacing: 0.02em;
-        }
-
-        /* Education */
-        .edu-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0.8rem 1.2rem;
-        }
-        .edu-block p {
-            font-size: 0.88rem;
-        }
-        .edu-block .meta {
-            color: #4A7A8A;
-            font-size: 0.8rem;
-            margin: 0.15rem 0;
-        }
-        .edu-block .tags {
-            margin-top: 0.3rem;
-        }
-
-        /* Contact popup */
-        .contact-popup {
-            display: none;
-            background: #F8F6F3;
-            padding: 1.2rem 1.4rem;
-            border-radius: 16px;
-            margin-top: 0.8rem;
-            border: 2px solid #D98A44;
-        }
-        .contact-popup p {
-            font-size: 0.9rem;
-            margin-bottom: 0.2rem;
-        }
-        .contact-popup a {
-            color: #1E2B38;
-            text-decoration: underline;
-            text-underline-offset: 2px;
-        }
-
-        .btn {
-            display: inline-block;
-            background: #1E2B38;
-            padding: 0.45rem 1.6rem;
+            align-items: center;
+            padding: 0.6rem 1.5rem;
+            background: rgba(10, 10, 26, 0.85);
+            backdrop-filter: blur(16px);
             border-radius: 60px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            color: #FCFAF7;
+            border: 1px solid rgba(255, 77, 148, 0.15);
+            margin-bottom: 2rem;
+            position: sticky;
+            top: 0.6rem;
+            z-index: 100;
+            box-shadow: 0 0 40px rgba(255, 77, 148, 0.03);
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            min-height: 3.2rem;
+        }
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            color: #ccc;
             text-decoration: none;
-            transition: background 0.2s, transform 0.15s;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+            white-space: nowrap;
+        }
+        .nav-links a:hover {
+            color: var(--neon);
+        }
+        .btn {
+            background: var(--neon);
             border: none;
+            padding: 0.5rem 1.4rem;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #fff;
             cursor: pointer;
-            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            transition: transform 0.15s, box-shadow 0.2s;
+            font-family: inherit;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 0 20px rgba(255, 77, 148, 0.15);
+            white-space: nowrap;
         }
         .btn:hover {
-            background: #0F1A24;
-            transform: scale(1.02);
+            transform: scale(1.03);
+            box-shadow: 0 0 35px var(--neon-glow);
         }
-        .btn.ghost {
-            background: #EEEAE4;
-            color: #1E2B38;
-            margin-left: 0.5rem;
+        .vibe-btn {
+            background: transparent;
+            border: 1px solid var(--neon);
+            color: var(--neon);
+            animation: pulseGlow 1.8s infinite alternate;
         }
-        .btn.ghost:hover {
-            background: #DCD4C8;
+        .vibe-btn:hover {
+            background: var(--neon);
+            color: #fff;
         }
-        .btn.secondary {
-            background: #D98A44;
-            color: #1E2B38;
-            margin-left: 0;
+        .lang-btn {
+            background: transparent;
+            border: 1px solid var(--secondary);
+            color: var(--secondary);
         }
-        .btn.secondary:hover {
-            background: #C47A34;
+        .lang-btn:hover {
+            background: var(--secondary);
+            color: #fff;
         }
-
-        .action-row {
+        @keyframes pulseGlow {
+            0% {
+                box-shadow: 0 0 5px var(--neon-glow);
+            }
+            100% {
+                box-shadow: 0 0 25px var(--neon);
+            }
+        }
+        .card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid var(--glass-border);
+            border-radius: 28px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--glass-shadow);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeUp 0.7s ease forwards;
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 28px;
+            padding: 1px;
+            background: var(--gradient-bg);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+        .card:hover {
+            border-color: rgba(255, 77, 148, 0.3);
+            box-shadow: 0 8px 50px rgba(255, 77, 148, 0.08);
+            transform: translateY(-2px);
+        }
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        h1 {
+            font-size: 3.8rem;
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            color: #fff;
+            text-shadow: 0 0 60px rgba(255, 77, 148, 0.08);
+        }
+        h1 span {
+            color: var(--neon);
+            text-shadow: 0 0 40px var(--neon-glow);
+        }
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: #fff;
+        }
+        h2 i {
+            color: var(--neon);
+            text-shadow: 0 0 20px var(--neon-glow);
+        }
+        p {
+            color: #ddd;
+        }
+        .quick-facts {
             display: flex;
             flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1.2rem;
+        }
+        .quick-fact {
+            background: rgba(255, 77, 148, 0.08);
+            border: 1px solid rgba(255, 77, 148, 0.15);
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            color: #ddd;
+            letter-spacing: 0.3px;
+        }
+        .quick-fact i {
+            margin-right: 0.3rem;
+            color: var(--neon);
+        }
+        .tag {
+            background: rgba(255, 77, 148, 0.08);
+            border: 1px solid rgba(255, 77, 148, 0.15);
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #fff;
+            transition: all 0.2s;
+            display: inline-block;
+            white-space: nowrap;
+        }
+        .tag:hover {
+            background: rgba(255, 77, 148, 0.15);
+            border-color: var(--neon);
+        }
+        .tag i {
+            margin-right: 0.4rem;
+            color: var(--neon);
+        }
+        .flex-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        @media (max-width: 700px) {
+            .flex-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .edu-courses {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 0.2rem;
+        }
+        .edu-courses .tag {
+            margin: 0;
+            padding: 0.3rem 0.9rem;
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+        .interests-grid,
+        .traits-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 0.5rem;
+        }
+        .interests-grid .tag,
+        .traits-grid .tag {
+            font-size: 0.9rem;
+        }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.2rem;
+        }
+        .skill-card {
+            background: rgba(20, 20, 45, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 77, 148, 0.1);
+            border-radius: 20px;
+            padding: 1.4rem 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 0 20px rgba(255, 77, 148, 0.02);
+        }
+        .skill-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: var(--neon);
+            box-shadow: 0 0 45px rgba(255, 77, 148, 0.15);
+            background: rgba(30, 30, 65, 0.8);
+        }
+        .skill-card:active {
+            transform: scale(0.95);
+        }
+        .skill-card i {
+            font-size: 2.2rem;
+            color: var(--neon);
+            margin-bottom: 0.4rem;
+            display: block;
+            text-shadow: 0 0 30px var(--neon-glow);
+        }
+        .skill-card h4 {
+            font-weight: 600;
+            font-size: 1rem;
+            color: #fff;
+        }
+        .skill-card .tap-hint {
+            font-size: 0.7rem;
+            color: #888;
+            margin-top: 0.5rem;
+            display: block;
+            letter-spacing: 1px;
+            opacity: 0.5;
+            transition: opacity 0.2s;
+        }
+        .skill-card:hover .tap-hint {
+            opacity: 1;
+            color: var(--neon);
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            z-index: 999;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal.active {
+            display: flex;
+        }
+        .modal-content {
+            background: #16162e;
+            border: 1px solid var(--neon);
+            border-radius: 28px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            color: #eee;
+            position: relative;
+            animation: modalFade 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 0 60px rgba(255, 77, 148, 0.1);
+        }
+        @keyframes modalFade {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1.2rem;
+            background: none;
+            border: none;
+            color: #aaa;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .modal-close:hover {
+            color: var(--neon);
+        }
+        .modal-content h3 {
+            color: var(--neon);
+            text-shadow: 0 0 30px var(--neon-glow);
+        }
+        .modal-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 0.5rem 0 0;
+        }
+        .modal-content ul li {
+            padding: 0.2rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            color: #ddd;
+        }
+        .modal-content ul li:last-child {
+            border-bottom: none;
+        }
+        .modal-content ul li::before {
+            content: "▹ ";
+            color: var(--neon);
+        }
+        .projects-wrapper {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+        }
+        .projects-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            touch-action: pan-y;
+        }
+        .project-card {
+            flex: 0 0 100%;
+            background: rgba(20, 20, 45, 0.5);
+            border: 1px solid rgba(255, 77, 148, 0.08);
+            border-radius: 20px;
+            padding: 1.5rem;
+            transition: all 0.25s;
+            min-height: 180px;
+            backdrop-filter: blur(4px);
+        }
+        .project-card h4 {
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+        }
+        .project-card p {
+            color: #aaa;
+            font-size: 0.9rem;
+            margin-bottom: 0.6rem;
+        }
+        .project-card .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+        .project-card .project-tags span {
+            background: rgba(255, 77, 148, 0.08);
+            padding: 0.1rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            color: #ccc;
+            border: 1px solid rgba(255, 77, 148, 0.1);
+        }
+        .projects-dots {
+            display: flex;
+            justify-content: center;
             gap: 0.5rem;
             margin-top: 0.8rem;
         }
-
-        /* ── Responsive (vertical screens) ── */
-        @media (max-width: 820px) {
-            .cv-grid {
-                grid-template-columns: 1fr;
-                gap: 1.2rem;
-            }
-            body {
-                padding: 1rem 0.8rem;
-            }
-            .card,
-            .card-side {
-                padding: 1.2rem 1.2rem !important;
-            }
-            .sidebar .card-side {
-                padding: 1.2rem 1.2rem !important;
-            }
-            .main .card {
-                padding: 1.2rem 1.2rem !important;
-            }
+        .projects-dots span {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #555;
+            cursor: pointer;
+            transition: background 0.3s;
         }
-
-        @media (max-width: 600px) {
-            .card,
-            .card-side {
-                padding: 1rem 1rem !important;
-            }
-            .profile-name {
-                font-size: 1.3rem;
-            }
-            .tag {
-                font-size: 0.65rem;
-                padding: 0.1rem 0.6rem;
-            }
-            .exp-item .bullets li {
-                font-size: 0.8rem;
-            }
-            .contact-line .label {
-                min-width: 40px;
-            }
-            h2 {
-                font-size: 0.65rem;
-            }
-            .exp-header .role {
-                font-size: 0.85rem;
-            }
-            .project-item strong {
-                font-size: 0.85rem;
-            }
-            .edu-grid {
-                grid-template-columns: 1fr;
-            }
+        .projects-dots span.active {
+            background: var(--neon);
         }
-
-        /* ── Print / PDF overrides (browser print) ── */
-        @media print {
-            .toolbar {
-                display: none !important;
-            }
-            .cv-grid {
-                display: block !important;
-                width: 100% !important;
-            }
-            .sidebar,
-            .main {
-                display: block !important;
-                width: 100% !important;
-            }
-            .card,
-            .card-side {
-                opacity: 1 !important;
-                transform: none !important;
-                box-shadow: none !important;
-                border: 1px solid #e0ddd8 !important;
-                padding: 0.5rem 0.8rem !important;
-                margin-bottom: 0.4rem !important;
-                page-break-inside: avoid;
-            }
-            body {
-                background: white;
-                padding: 0.2in;
-            }
-            .contact-popup {
-                display: none !important;
-            }
-            .exp-item .bullets li {
-                font-size: 0.78rem !important;
-            }
-            .project-item {
-                font-size: 0.78rem !important;
-            }
-            .profile-text {
-                font-size: 0.85rem !important;
-            }
-            .tag {
-                font-size: 0.65rem !important;
-                padding: 0.05rem 0.6rem !important;
-            }
-            .contact-line {
-                font-size: 0.75rem !important;
-            }
-        }
-
-        .flex-wrap {
+        .langs {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.3rem;
+            gap: 0.8rem;
         }
-        .print-note {
-            margin-top: 2rem;
-            padding: 1rem;
-            background: #f8f4ee;
-            border-radius: 12px;
+        .lang-item {
+            background: rgba(124, 77, 255, 0.08);
+            border: 1px solid rgba(124, 77, 255, 0.2);
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
             font-size: 0.9rem;
-            text-align: center;
-            color: #4a7a8a;
-            border: 1px dashed #3d6b7a;
+            color: #ddd;
         }
-        @media print {
-            .print-note {
-                display: none !important;
+        .lang-item strong {
+            color: #fff;
+        }
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .timeline-item {
+            border-left: 3px solid var(--neon);
+            padding-left: 1.2rem;
+            padding-bottom: 0.6rem;
+            transition: all 0.2s;
+        }
+        .timeline-item:hover {
+            border-left-color: var(--secondary);
+        }
+        .timeline-item strong {
+            color: #fff;
+        }
+        .timeline-item em {
+            color: #aaa;
+            font-style: normal;
+            font-size: 0.9rem;
+        }
+        .contact-buttons {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.8rem;
+        }
+        .contact-buttons .btn {
+            background: var(--neon);
+            color: #fff;
+        }
+        .contact-buttons .btn-outline {
+            background: transparent;
+            border: 1px solid var(--neon);
+            color: var(--neon);
+        }
+        .contact-buttons .btn-outline:hover {
+            background: var(--neon);
+            color: #fff;
+        }
+        .contact-text {
+            color: #aaa;
+            font-size: 0.9rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            margin-top: 0.4rem;
+        }
+        .contact-text i {
+            color: var(--neon);
+            width: 1.2rem;
+        }
+        footer {
+            margin-top: 3rem;
+            padding: 2rem 0 1rem;
+            border-top: 1px solid rgba(255, 77, 148, 0.06);
+            text-align: center;
+            color: #888;
+            font-size: 0.9rem;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover {
+            color: var(--neon);
+        }
+        .footer-copy {
+            opacity: 0.5;
+            font-size: 0.8rem;
+        }
+        .footer-copy i {
+            color: var(--neon);
+        }
+        .secret-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #1a1a2e;
+            border: 2px solid var(--neon);
+            border-radius: 28px;
+            padding: 2rem 2.5rem;
+            z-index: 1000;
+            text-align: center;
+            color: #fff;
+            box-shadow: 0 0 80px rgba(255, 77, 148, 0.2);
+            animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .secret-popup.show {
+            display: block;
+        }
+        @keyframes popIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.85);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+        .secret-popup h3 {
+            color: var(--neon);
+            text-shadow: 0 0 40px var(--neon-glow);
+        }
+        .secret-popup .close-secret {
+            margin-top: 1rem;
+            background: var(--neon);
+            border: none;
+            padding: 0.4rem 1.6rem;
+            border-radius: 40px;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 0 30px var(--neon-glow);
+            transition: transform 0.15s;
+        }
+        .secret-popup .close-secret:hover {
+            transform: scale(1.05);
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 999;
+        }
+        .overlay.show {
+            display: block;
+        }
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.6rem;
+            }
+            .nav-links {
+                justify-content: center;
+            }
+            .greeting-logo {
+                text-align: center;
+                display: block;
+                white-space: normal;
+            }
+            h1 {
+                font-size: 2.8rem;
+            }
+            .card {
+                padding: 1.5rem;
+            }
+            .project-card {
+                padding: 1rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .nav-links {
+                gap: 0.6rem;
+            }
+            .nav-links a {
+                font-size: 0.8rem;
+            }
+            .btn {
+                font-size: 0.8rem;
+                padding: 0.4rem 1rem;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            .greeting-logo {
+                font-size: 1.6rem;
+            }
+            .quick-fact {
+                font-size: 0.7rem;
+                padding: 0.1rem 0.6rem;
+            }
+            .tag {
+                font-size: 0.75rem;
+                padding: 0.2rem 0.6rem;
+            }
+            .edu-courses .tag {
+                font-size: 0.7rem;
+            }
+            .interests-grid .tag,
+            .traits-grid .tag {
+                font-size: 0.75rem;
+            }
+            .skills-grid {
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            }
+            .skill-card i {
+                font-size: 1.6rem;
+            }
+            .contact-buttons .btn {
+                font-size: 0.75rem;
+                padding: 0.3rem 0.8rem;
             }
         }
     </style>
 </head>
 <body>
+    <div class="vibe-overlay" id="vibeOverlay"></div>
+    <audio id="vibeAudio" loop>
+        <source src="your-song.mp3" type="audio/mpeg" />
+    </audio>
 
     <div class="container">
+        <div class="greeting-logo typing" id="greetingText"></div>
 
-        <!-- Toolbar (only language toggle) -->
-        <div class="toolbar">
-            <button class="lang-btn" id="langToggle">Русский</button>
-        </div>
+        <header class="header">
+            <div class="nav-links" id="navLinks">
+                <a href="#about" data-key="about">About</a>
+                <a href="#education" data-key="education">Education</a>
+                <a href="#skills" data-key="skills">Skills</a>
+                <a href="#experience" data-key="experience">Experience</a>
+                <a href="#projects" data-key="projects">Projects</a>
+                <a href="#contact" data-key="contact">Contact</a>
+                <button class="btn vibe-btn" id="vibeBtn">Vibe</button>
+                <button class="btn lang-btn" id="langToggle">EN/RU</button>
+            </div>
+        </header>
 
-        <!-- CV Grid -->
-        <div class="cv-grid" id="cvGrid">
+        <section class="card" style="animation-delay:0.05s;" id="hero">
+            <h1 id="heroName">Sofiia <span>Valyanova</span></h1>
+            <p id="heroTitle" style="font-size:1.3rem; opacity:0.8; max-width:600px; margin-top:0.2rem;">BSc Digital Business & Data Science</p>
+            <p id="heroDesc" style="font-size:1.1rem; opacity:0.6; max-width:600px;">Building smart systems, automating workflows, and turning data into decisions.</p>
+            <div class="quick-facts" id="quickFacts">
+                <span class="quick-fact"><i class="fas fa-calendar-alt"></i> 20 y.o.</span>
+                <span class="quick-fact"><i class="fas fa-map-marker-alt"></i> Dubai</span>
+                <span class="quick-fact"><i class="fas fa-bolt"></i> 8000 wpm</span>
+                <span class="quick-fact"><i class="fas fa-brain"></i> ENTP · 7w8 · SP7</span>
+            </div>
+        </section>
 
-            <!-- ===== SIDEBAR ===== -->
-            <div class="sidebar" id="sidebar">
-                <!-- Profile Card -->
-                <div class="card-side" id="card-profile">
-                    <div class="profile-name">Sofia Valyanova</div>
-                    <div class="profile-title">BSc Digital Business &amp; Data Science</div>
-                    <hr class="divider" />
-                    <div class="contact-line"><span class="label">Location</span> Dubai, UAE</div>
-                    <div class="contact-line"><span class="label">Phone</span> +971 56 229 1034</div>
-                    <div class="contact-line"><span class="label">Email</span> <a href="mailto:valyanovvva@gmail.com">valyanovvva@gmail.com</a></div>
-                    <div class="contact-line"><span class="label">Visa</span> Student Visa · UAE</div>
-                    <hr class="divider" />
+        <section id="about" class="card">
+            <h2><i class="fas fa-user-graduate"></i> <span id="aboutTitle">About Me</span></h2>
+            <p id="aboutText" style="max-width:700px;">
+                I am a Digital Business & Data Science student based in Dubai. I combine analytical thinking with practical execution, using Python, SQL, and AI tools to automate processes and build smart solutions. I thrive on complexity, learn fast, and never settle for boring. I also enjoy game development and testing. I'm eager to apply my analytical toolkit and cross-functional communication skills to drive efficiency and deliver tangible results for a growth-focused team.
+            </p>
+        </section>
 
-                    <div class="skill-group">
-                        <span class="label">Core traits</span>
-                        <span class="tag accent">Innovative</span>
-                        <span class="tag accent">Adaptable</span>
-                        <span class="tag accent">Curious</span>
-                        <span class="tag accent">Strategic</span>
-                        <span class="tag accent">Persuasive</span>
-                    </div>
-
-                    <div class="skill-group">
-                        <span class="label">Languages</span>
-                        <div class="lang-item"><span>English</span><span class="level">C1+ · Fluent</span></div>
-                        <div class="lang-item"><span>Russian</span><span class="level">Native</span></div>
-                        <div class="lang-item"><span>Tatar</span><span class="level">Basic · Heritage</span></div>
-                    </div>
-
-                    <div class="skill-group">
-                        <span class="label">Quick facts</span>
-                        <div style="font-size:0.82rem; color:#1E2B38; line-height:1.6;">
-                            Born in Russia · UAE Residence<br>
-                            Tatar heritage · EU (Bulgarian)
-                        </div>
-                    </div>
-
-                    <div class="skill-group">
-                        <span class="label">Interests</span>
-                        <div class="interests-grid" id="interests-container">
-                            <!-- injected by JS -->
-                        </div>
-                    </div>
+        <section class="card">
+            <h2><i class="fas fa-heart"></i> <span id="interestsTitle">Interests & Core Traits</span></h2>
+            <div style="margin-bottom:0.8rem;">
+                <strong style="color:#fff;">Interests</strong>
+                <div class="interests-grid">
+                    <span class="tag">Strategic games</span>
+                    <span class="tag">Hackathons & side builds</span>
+                    <span class="tag">Sci‑Fi & behavioral psychology</span>
+                    <span class="tag">Travel & urban exploration</span>
+                    <span class="tag">Debate & public speaking</span>
                 </div>
+            </div>
+            <div>
+                <strong style="color:#fff;">Core traits</strong>
+                <div class="traits-grid">
+                    <span class="tag">Innovative</span>
+                    <span class="tag">Adaptable</span>
+                    <span class="tag">Curious</span>
+                    <span class="tag">Strategic</span>
+                    <span class="tag">Persuasive</span>
+                </div>
+            </div>
+        </section>
 
-                <!-- Skills Sidebar -->
-                <div class="card-side" id="card-skills-side">
-                    <h2>Expertise</h2>
-                    <div class="skill-group">
-                        <span class="label">Data &amp; Analytics</span>
-                        <span class="tag tech">Python · pandas</span>
-                        <span class="tag tech">SQL · PostgreSQL</span>
-                        <span class="tag tech">Power BI</span>
-                        <span class="tag tech">Data Viz</span>
-                        <span class="tag tech">Excel · VBA</span>
-                         <span class="tag tech">MS Office</span>
-                        <span class="tag tech">ETL</span>
-                    </div>
-                    <div class="skill-group">
-                        <span class="label">Dev &amp; Automation</span>
-                        <span class="tag tech">Python scripting</span>
-                        <span class="tag tech">Node.js</span>
-                        <span class="tag tech">AI/LLM integration (OpenAI)</span>
-                        <span class="tag tech">Telegram Bot API</span>
-                        <span class="tag tech">HTML / CSS / Java</span>
-                        <span class="tag tech">Azure · Data Factory</span>
-                        <span class="tag tech">Git</span>
-                        <span class="tag tech">Power Automate</span>
-                    </div>
-                    <div class="skill-group">
-                        <span class="label">Business &amp; Soft</span>
-                        <span class="tag">Agile · Scrum</span>
+        <section id="education" class="card">
+            <h2><i class="fas fa-university"></i> <span id="eduTitle">Education</span></h2>
+            <div class="flex-grid">
+                <div>
+                    <p><strong id="eduProgram">Bachelor in Digital Business & Data Science</strong><br>
+                        <span id="eduUniv">University of Europe for Applied Science | UAE</span><br>
+                        <span class="tag" id="eduYears">2024 – 2027</span> <span class="tag" id="eduGPA">GPA 3.1 / 4.0</span></p>
+                </div>
+                <div>
+                    <p><strong id="eduCourseworkTitle">Relevant coursework:</strong></p>
+                    <div class="edu-courses" id="coursesContainer">
+                        <span class="tag">Digital Transformation</span>
+                        <span class="tag">Big Data</span>
+                        <span class="tag">Marketing & Sales</span>
                         <span class="tag">CRM</span>
-                        <span class="tag">Requirements</span>
-                        <span class="tag">Stakeholder Comms</span>
-                        <span class="tag">Process Optimization</span>
-                        <span class="tag">Self-organized</span>
+                        <span class="tag">Financial Accounting</span>
+                        <span class="tag">IT Platforms</span>
+                        <span class="tag">Agile PM</span>
+                        <span class="tag">Frontend</span>
+                        <span class="tag">IT Security</span>
+                        <span class="tag">AI Programming</span>
+                        <span class="tag">Quantitative & Qualitative Methods</span>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- ===== MAIN ===== -->
-            <div class="main" id="main">
-
-                <!-- About -->
-                <div class="card" id="card-about">
-                    <h2>About</h2>
-                    <p class="profile-text">
-                        I'm a Digital Business &amp; Data Science student based in Dubai who can turn data and customer insights into streamlined processes and measurable performance gains. With hands-on experience in community management, e-commerce operations, and product development, I bridge the gap between business strategy and technical execution. I'm eager to apply my analytical toolkit and cross-functional communication skills to drive efficiency and deliver tangible results for a growth-focused team.
-                    </p>
-                    <div class="flex-wrap" style="margin-top:0.4rem;">
-                        <span class="tag accent">Data-driven</span>
-                        <span class="tag accent">Process automation</span>
-                        <span class="tag accent">BI &amp; dashboards</span>
-                        <span class="tag accent">Cross-functional</span>
-                        <span class="tag accent">Agile · Scrum</span>
-                        <span class="tag accent">8,000 wpm</span>
-                    </div>
-                    <div style="margin-top:0.8rem;">
-                        <span class="seeking">Open to full‑time · part‑time · internships</span>
-                    </div>
+        <section id="skills" class="card">
+            <h2><i class="fas fa-code"></i> <span id="skillsTitle">Technical Skills</span></h2>
+            <div class="skills-grid">
+                <div class="skill-card" data-modal="ml">
+                    <i class="fas fa-robot"></i>
+                    <h4>AI & ML</h4>
+                    <span class="tap-hint">tap to view</span>
                 </div>
-
-                <!-- Experience -->
-                <div class="card" id="card-exp">
-                    <h2>Experience</h2>
-
-                    <div class="exp-item">
-                        <div class="exp-header">
-                            <span class="role">Co‑founder &amp; Product Lead</span>
-                            <span class="date">Mar 2023 – Present</span>
-                        </div>
-                        <div class="org">Flashnight Studios · GameDev</div>
-                        <ul class="bullets">
-                            <li>Led UI/UX and playtesting loops</li>
-                            <li>Integrated a CRM to segment players and track KPIs, boosting repeat sessions</li>
-                            <li>Orchestrated a cross‑functional team using Agile sprints and task boards</li>
-                            <li>Owned narrative design and contributed to front‑end code</li>
-                        </ul>
-                    </div>
-
-                    <div class="exp-item">
-                        <div class="exp-header">
-                            <span class="role">Community Manager &amp; Ad Sales</span>
-                            <span class="date">Current</span>
-                        </div>
-                        <div class="org">Dubai Youth Community · 5k+ Telegram</div>
-                        <ul class="bullets">
-                            <li>Grew and managed a 5,000‑member community with consistent engagement</li>
-                            <li>Closed ad partnerships with local businesses</li>
-                            <li>Built Telegram bots for ticket reservations and automated scheduling, cutting manual work by ~80%</li>
-                        </ul>
-                    </div>
-
-                    <div class="exp-item">
-                        <div class="exp-header">
-                            <span class="role">E‑commerce Operations</span>
-                            <span class="date">Mar 2021 – Aug 2025</span>
-                        </div>
-                        <div class="org">Freelance · Ozon, eBay, Avito</div>
-                        <ul class="bullets">
-                            <li>Managed listings, inventory, and pricing across 3 platforms simultaneously</li>
-                            <li>Maintained high seller ratings through diligent order tracking and customer care</li>
-                            <li>Analyzed sales data to spot trends and optimize assortment</li>
-                        </ul>
-                    </div>
-
-                    <div class="exp-item">
-                        <div class="exp-header">
-                            <span class="role">Business Analytics Assistant</span>
-                            <span class="date">May – Jul 2024</span>
-                        </div>
-                        <div class="org">University of Europe for Applied Sciences</div>
-                        <ul class="bullets">
-                            <li>Cleaned and structured student feedback data across multiple service categories</li>
-                            <li>Built interactive Excel &amp; Power BI dashboards to visualize KPIs and satisfaction</li>
-                            <li>Presented data‑driven recommendations that were adopted for curriculum improvements</li>
-                        </ul>
-                    </div>
-
-                    <div class="exp-item">
-                        <div class="exp-header">
-                            <span class="role">School President &amp; Student Council Head</span>
-                            <span class="date">Sep 2021 – Jul 2024</span>
-                        </div>
-                        <div class="org">Secondary School</div>
-                        <ul class="bullets">
-                            <li>Led council operations, organized events and charity drives, and served as the main liaison between students and administration</li>
-                        </ul>
-                    </div>
+                <div class="skill-card" data-modal="data">
+                    <i class="fas fa-chart-bar"></i>
+                    <h4>Data & Analytics</h4>
+                    <span class="tap-hint">tap to view</span>
                 </div>
-
-                <!-- Education -->
-                <div class="card" id="card-edu">
-                    <h2>Education</h2>
-                    <div class="edu-grid">
-                        <div class="edu-block">
-                            <p><strong>BSc Digital Business &amp; Data Science</strong></p>
-                            <p class="meta">University of Europe for Applied Sciences · Dubai, UAE</p>
-                            <div class="tags">
-                                <span class="tag">2024 – 2027</span>
-                                <span class="tag">GPA 3.1 / 4.0</span>
-                            </div>
-                        </div>
-                        <div class="edu-block">
-                            <p style="font-size:0.7rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:#3D6B7A; margin-bottom:0.3rem;">Coursework</p>
-                            <span class="tag">Digital Transformation</span>
-                            <span class="tag">Big Data</span>
-                            <span class="tag">Marketing &amp; Sales</span>
-                            <span class="tag">CRM</span>
-                            <span class="tag">Financial Accounting</span>
-                            <span class="tag">IT Platforms</span>
-                            <span class="tag">Agile PM</span>
-                            <span class="tag">Frontend</span>
-                            <span class="tag">IT Security</span>
-                            <span class="tag">AI</span>
-                            <span class="tag">Programming</span>
-                            <span class="tag">Quant &amp; Qual Methods</span>
-                        </div>
-                    </div>
+                <div class="skill-card" data-modal="web">
+                    <i class="fas fa-globe"></i>
+                    <h4>Web & Automation</h4>
+                    <span class="tap-hint">tap to view</span>
                 </div>
-
-                <!-- Projects -->
-                <div class="card" id="card-projects">
-                    <h2>Projects</h2>
-
-                    <div class="project-item">
-                        <div class="project-header">
-                            <strong>Interactive CV / Resume</strong>
-                            <span class="stack">HTML · CSS · JavaScript</span>
-                        </div>
-                        Designed and developed a fully responsive, bilingual (EN/RU) CV with a clean, recruiter-optimized layout that adapts to print and screen. Implemented dynamic language switching and intersection-based reveal animations.
-                    </div>
-
-                    <div class="project-item">
-                        <div class="project-header">
-                            <strong>Telegram Ticket Reservation Bot</strong>
-                            <span class="stack">Python · Bot API · SQLite</span>
-                        </div>
-                        End‑to‑end chatbot for event ticket reservations: users pick events, choose seats, get confirmations. Admin panel for capacity management and waitlist notifications. Reduced manual ticket handling to zero.
-                    </div>
-
-                    <div class="project-item">
-                        <div class="project-header">
-                            <strong>Automated Content Scheduler</strong>
-                            <span class="stack">Python · Telegram Bot API</span>
-                        </div>
-                        Bot that automates event announcements for a 5,000‑member channel. Eliminated manual posting and cut recurring admin work by ~80%.
-                    </div>
-
-                    <div class="project-item">
-                        <div class="project-header">
-                            <strong>Customer Satisfaction BI Dashboard</strong>
-                            <span class="stack">Power BI · Excel · Power Query</span>
-                        </div>
-                        End‑to‑end BI pipeline: collected survey data, cleaned in Power Query, built an interactive dashboard tracking NPS and satisfaction drivers. Identified 2 underperforming areas, recommendations adopted.
-                    </div>
-
-                    <div class="project-item">
-                        <div class="project-header">
-                            <strong>Sales Performance &amp; Assortment Analysis</strong>
-                            <span class="stack">SQL · PostgreSQL · Python · pandas</span>
-                        </div>
-                        Analyzed 12 months of transaction data to model seasonal demand and SKU performance. Delivered a report with assortment optimization recommendations and projected revenue impact.
-                    </div>
-
-                    <div class="project-item">
-                        <div class="project-header">
-                            <strong>E‑commerce Price Monitoring Script</strong>
-                            <span class="stack">Python · web scraping · pandas</span>
-                        </div>
-                        Built a Python script to monitor competitor pricing across marketplaces, aggregating data into structured reports. Automated a manual process, saving several hours per week.
-                    </div>
+                <div class="skill-card" data-modal="devops">
+                    <i class="fas fa-cloud"></i>
+                    <h4>DevOps & Tools</h4>
+                    <span class="tap-hint">tap to view</span>
                 </div>
-
-                <!-- Contact -->
-                <div class="card" id="card-contact">
-                    <h2>Get in touch</h2>
-                    <div class="action-row">
-                        <a href="mailto:valyanovvva@gmail.com" class="btn">Email me</a>
-                        <button onclick="togglePopup()" class="btn ghost">Show contacts</button>
-                    </div>
-                    <div class="contact-popup" id="contactPopup">
-                        <p><strong>Phone</strong> &nbsp; +971 56 229 1034</p>
-                        <p><strong>Email</strong> &nbsp; <a href="mailto:valyanovvva@gmail.com">valyanovvva@gmail.com</a></p>
-                        <p><strong>Location</strong> &nbsp; Dubai, UAE</p>
-                        <button onclick="togglePopup()" class="btn secondary" style="margin-top:0.6rem;">Close</button>
-                    </div>
+                <div class="skill-card" data-modal="soft">
+                    <i class="fas fa-users"></i>
+                    <h4>Soft & Product</h4>
+                    <span class="tap-hint">tap to view</span>
                 </div>
+            </div>
+        </section>
 
-            </div><!-- /main -->
-        </div><!-- /cv-grid -->
-
-        <!-- Print instruction note (hidden when printing) -->
-        <div class="print-note">
-            <strong>📄 To save as PDF:</strong> Use your browser's <strong>Print</strong> (Ctrl+P / Cmd+P) and choose <strong>"Save as PDF"</strong> as the destination.
+        <div class="modal" id="modal-ml">
+            <div class="modal-content">
+                <button class="modal-close" data-close>&times;</button>
+                <h3>AI & ML</h3>
+                <ul>
+                    <li>Python (pandas, numpy)</li>
+                    <li>NLP</li>
+                    <li>Computer Vision</li>
+                    <li>Model Tuning</li>
+                </ul>
+            </div>
+        </div>
+        <div class="modal" id="modal-data">
+            <div class="modal-content">
+                <button class="modal-close" data-close>&times;</button>
+                <h3>Data & Analytics</h3>
+                <ul>
+                    <li>SQL (PostgreSQL, Azure)</li>
+                    <li>Power BI / Tableau</li>
+                    <li>Excel (Power Query, VBA)</li>
+                    <li>ETL / Data Pipelines</li>
+                    <li>Data Analysis & Visualization</li>
+                    <li>MS Office</li>
+                </ul>
+            </div>
+        </div>
+        <div class="modal" id="modal-web">
+            <div class="modal-content">
+                <button class="modal-close" data-close>&times;</button>
+                <h3>Web & Automation</h3>
+                <ul>
+                    <li>Java / HTML / CSS</li>
+                    <li>Power Automate</li>
+                    <li>AI-assisted (Cursor)</li>
+                    <li>Microsoft 365 / Teams</li>
+                </ul>
+            </div>
+        </div>
+        <div class="modal" id="modal-devops">
+            <div class="modal-content">
+                <button class="modal-close" data-close>&times;</button>
+                <h3>DevOps & Tools</h3>
+                <ul>
+                    <li>Git / GitHub</li>
+                    <li>Azure (Data Factory)</li>
+                    <li>CI/CD</li>
+                    <li>Docker (basics)</li>
+                </ul>
+            </div>
+        </div>
+        <div class="modal" id="modal-soft">
+            <div class="modal-content">
+                <button class="modal-close" data-close>&times;</button>
+                <h3>Soft & Product</h3>
+                <ul>
+                    <li>Agile · SCRUM</li>
+                    <li>Product Thinking</li>
+                    <li>Communication</li>
+                    <li>Fast Learning</li>
+                    <li>Research</li>
+                    <li>Problem Solving</li>
+                </ul>
+            </div>
         </div>
 
-    </div><!-- /container -->
+        <section id="experience" class="card">
+            <h2><i class="fas fa-briefcase"></i> <span id="expTitle">Experience</span></h2>
+            <div class="timeline">
+                <div class="timeline-item"><strong>E-commerce Ops</strong> – <em>Ozon, eBay, Avito</em><br>Product listing, tracking, customer satisfaction.</div>
+                <div class="timeline-item"><strong>Community Manager</strong> – <em>Dubai Youth Community (5k+ TG)</em><br>Content, events, ad sales.</div>
+                <div class="timeline-item"><strong>Business Analyst</strong> – <em>UEAS</em><br>Dashboards in Power BI & Excel, insights for performance.</div>
+                <div class="timeline-item"><strong>Co-founder</strong> – <em>Flashnight Studios</em><br>UI/UX, playtesting, CRM, narrative.</div>
+                <div class="timeline-item"><strong>School President</strong> – <em>2021–2024</em><br>Events, charity, student representation.</div>
+            </div>
+        </section>
+
+        <div class="projects-wrapper" id="projects">
+            <div class="projects-track" id="projectTrack">
+                <div class="project-card">
+                    <h4>Customer Feedback Dashboard</h4>
+                    <p>Power BI dashboard analyzing survey data to identify key satisfaction drivers for a university project.</p>
+                    <div class="project-tags">
+                        <span>Power BI</span>
+                        <span>Excel</span>
+                        <span>Data Viz</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h4>Sales Performance Report</h4>
+                    <p>SQL + Python project analyzing sales data, finding trends, and proposing assortment optimization.</p>
+                    <div class="project-tags">
+                        <span>SQL</span>
+                        <span>Python</span>
+                        <span>Pandas</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h4>Telegram Community Bot</h4>
+                    <p>Automated bot for Dubai Youth Community (5k+ members) – event announcements and engagement tracking.</p>
+                    <div class="project-tags">
+                        <span>Python</span>
+                        <span>Telegram API</span>
+                        <span>Automation</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h4>Personal Portfolio Site</h4>
+                    <p>This very site – built from scratch with HTML, CSS, and JavaScript, featuring glassmorphism and interactive elements.</p>
+                    <div class="project-tags">
+                        <span>HTML/CSS</span>
+                        <span>JavaScript</span>
+                        <span>UI/UX</span>
+                    </div>
+                </div>
+            </div>
+            <div class="projects-dots" id="projectDots"></div>
+        </div>
+
+        <section class="card">
+            <h2><i class="fas fa-language"></i> <span id="langTitle">Languages</span></h2>
+            <div class="langs">
+                <span class="lang-item"><strong>Russian</strong> – native</span>
+                <span class="lang-item"><strong>English</strong> – fluent (C1+)</span>
+                <span class="lang-item"><strong>Tatar</strong> – basic</span>
+            </div>
+        </section>
+
+        <section id="contact" class="card">
+            <h2><i class="fas fa-paper-plane"></i> <span id="contactTitle">Let's connect</span></h2>
+            <p id="contactDesc" style="margin-bottom:1rem;">I am open to freelance, part-time, or full-time roles in AI, data, or automation, as well as internships in development and ML.</p>
+            <div class="contact-buttons">
+                <a href="mailto:valyanovvva@gmail.com" class="btn">Email</a>
+                <a href="https://www.linkedin.com/in/sofiia-valyanova-622916342" target="_blank" class="btn" style="background:#0a66c2;">LinkedIn</a>
+                <a href="https://github.com/dee0ne" target="_blank" class="btn" style="background:#333;">GitHub</a>
+                <a href="https://hh.ru/resume/e6a3ad5aff107dc4bf0039ed1f644d6f646253" target="_blank" class="btn" style="background:#d6001c;">HH.ru</a>
+            </div>
+            <div class="contact-text">
+                <span><i class="fas fa-phone"></i> +971 56 229 1034</span>
+                <span><i class="fas fa-map-marker-alt"></i> Dubai, UAE</span>
+            </div>
+        </section>
+
+        <footer>
+            <div class="footer-links">
+                <a href="https://www.linkedin.com/in/sofiia-valyanova-622916342" target="_blank">LinkedIn</a>
+                <a href="https://github.com/dee0ne" target="_blank">GitHub</a>
+                <a href="https://hh.ru/resume/e6a3ad5aff107dc4bf0039ed1f644d6f646253" target="_blank">HH.ru</a>
+                <a href="mailto:valyanovvva@gmail.com">Email</a>
+                <a href="tel:+971562291034">Phone</a>
+            </div>
+            <div class="footer-copy">
+                <p id="footerCopy">2026 Sofiia Valyanova · Built with <i class="fas fa-coffee"></i> and <i class="fas fa-heart" style="color:#E94560;"></i></p>
+                <p id="secretTrigger" style="cursor:pointer; opacity:0.4; font-size:0.7rem; margin-top:0.3rem;">click here for a secret</p>
+            </div>
+        </footer>
+    </div>
+
+    <div class="overlay" id="secretOverlay"></div>
+    <div class="secret-popup" id="secretPopup">
+        <h3>you found it</h3>
+        <p style="margin: 0.8rem 0; color: #ccc;">now lets make some money</p>
+        <button class="close-secret" id="closeSecret">close</button>
+    </div>
 
     <script>
-        // ── Content ──
-        const interestsData = {
-            en: [
-                'Strategic games',
-                'Hackathons & side builds',
-                'Sci‑Fi & behavioral psychology',
-                'Travel & urban exploration',
-                'Debate & public speaking'
-            ],
-            ru: [
-                'Стратегические игры',
-                'Хакатоны и пет-проекты',
-                'Научная фантастика и психология',
-                'Путешествия и городские исследования',
-                'Дебаты и выступления'
-            ]
-        };
+        const greetings = [
+            { lang: 'en', text: 'Hey! Nice to see you!' },
+            { lang: 'ru', text: 'Привет! Рада видеть тебя!' },
+            { lang: 'es', text: '¡Hola! Encantada de verte!' },
+            { lang: 'fr', text: 'Bonjour! Ravi de te voir!' },
+            { lang: 'de', text: 'Hallo! Schön dich zu sehen!' },
+            { lang: 'it', text: 'Ciao! Piacere di vederti!' },
+            { lang: 'pt', text: 'Olá! Prazer em ver você!' },
+            { lang: 'ja', text: 'こんにちは！お会いできて嬉しいです！' },
+            { lang: 'zh', text: '你好！很高兴见到你！' },
+            { lang: 'ar', text: 'مرحباً! سعيد برؤيتك!' },
+            { lang: 'hi', text: 'नमस्ते! आपको देखकर खुशी हुई!' }
+        ];
 
-        const content = {
+        let greetingIndex = 0;
+        let greetingTimer = null;
+        const greetingEl = document.getElementById('greetingText');
+        let isTyping = false;
+        let typewriterTimeout = null;
+
+        function typeWriter(text, element, callback) {
+            if (typewriterTimeout) clearTimeout(typewriterTimeout);
+            element.textContent = '';
+            element.classList.add('typing');
+            let i = 0;
+            isTyping = true;
+
+            function typeNext() {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                    typewriterTimeout = setTimeout(typeNext, 40);
+                } else {
+                    isTyping = false;
+                    if (callback) callback();
+                }
+            }
+            typeNext();
+        }
+
+        function rotateGreeting() {
+            if (isTyping) return;
+            const g = greetings[greetingIndex];
+            typeWriter(g.text, greetingEl, () => {
+                if (greetingTimer) clearTimeout(greetingTimer);
+                greetingTimer = setTimeout(() => {
+                    greetingIndex = (greetingIndex + 1) % greetings.length;
+                    rotateGreeting();
+                }, 2500);
+            });
+        }
+        rotateGreeting();
+
+        const translations = {
             en: {
-                profile: `
-                    <div class="profile-name">Sofia Valyanova</div>
-                    <div class="profile-title">BSc Digital Business &amp; Data Science</div>
-                    <hr class="divider" />
-                    <div class="contact-line"><span class="label">Location</span> Dubai, UAE</div>
-                    <div class="contact-line"><span class="label">Phone</span> +971 56 229 1034</div>
-                    <div class="contact-line"><span class="label">Email</span> <a href="mailto:valyanovvva@gmail.com">valyanovvva@gmail.com</a></div>
-                    <div class="contact-line"><span class="label">Visa</span> Student Visa · UAE</div>
-                    <hr class="divider" />
-                    <div class="skill-group">
-                        <span class="label">Core traits</span>
-                        <span class="tag accent">Innovative</span>
-                        <span class="tag accent">Adaptable</span>
-                        <span class="tag accent">Curious</span>
-                        <span class="tag accent">Strategic</span>
-                        <span class="tag accent">Persuasive</span>
-                    </div>
-                    <div class="skill-group">
-                        <span class="label">Languages</span>
-                        <div class="lang-item"><span>English</span><span class="level">C1+ · Fluent</span></div>
-                        <div class="lang-item"><span>Russian</span><span class="level">Native</span></div>
-                        <div class="lang-item"><span>Tatar</span><span class="level">Basic · Heritage</span></div>
-                    </div>
-                    <div class="skill-group">
-                        <span class="label">Quick facts</span>
-                        <div style="font-size:0.82rem; color:#1E2B38; line-height:1.6;">
-                            Born in Russia · UAE Residence<br>
-                            Tatar heritage · EU (Bulgarian)
-                        </div>
-                    </div>
-                    <div class="skill-group">
-                        <span class="label">Interests</span>
-                        <div class="interests-grid" id="interests-container"></div>
-                    </div>
-                `,
-                skills_side: `
-                    <h2>Expertise</h2>
-                    <div class="skill-group">
-                        <span class="label">Data &amp; Analytics</span>
-                        <span class="tag tech">Python · pandas</span>
-                        <span class="tag tech">SQL · PostgreSQL</span>
-                        <span class="tag tech">Power BI</span>
-                        <span class="tag tech">Data Viz</span>
-                        <span class="tag tech">Excel · VBA</span>
-                        <span class="tag tech">MS Office</span>
-                        <span class="tag tech">ETL</span>
-                    </div>
-                    <div class="skill-group">
-                        <span class="label">Dev &amp; Automation</span>
-                        <span class="tag tech">Python scripting</span>
-                        <span class="tag tech">Node.js</span>
-                        <span class="tag tech">AI/LLM integration (OpenAI)</span>
-                        <span class="tag tech">Telegram Bot API</span>
-                        <span class="tag tech">HTML / CSS / Java</span>
-                        <span class="tag tech">Azure · Data Factory</span>
-                        <span class="tag tech">Git</span>
-                        <span class="tag tech">Power Automate</span>
-                    </div>
-                    <div class="skill-group">
-                        <span class="label">Business &amp; Soft</span>
-                        <span class="tag">Agile · Scrum</span>
-                        <span class="tag">CRM</span>
-                        <span class="tag">Requirements</span>
-                        <span class="tag">Stakeholder Comms</span>
-                        <span class="tag">Process Optimization</span>
-                        <span class="tag">Self-organized</span>
-                    </div>
-                `,
-                about: `
-                    <h2>About</h2>
-                    <p class="profile-text">
-                        I'm a Digital Business &amp; Data Science student based in Dubai who can turn data and customer insights into streamlined processes and measurable performance gains. With hands-on experience in community management, e-commerce operations, and product development, I bridge the gap between business strategy and technical execution. I'm eager to apply my analytical toolkit and cross-functional communication skills to drive efficiency and deliver tangible results for a growth-focused team.
-                    </p>
-                    <div class="flex-wrap" style="margin-top:0.4rem;">
-                        <span class="tag accent">Data-driven</span>
-                        <span class="tag accent">Process automation</span>
-                        <span class="tag accent">BI &amp; dashboards</span>
-                        <span class="tag accent">Cross-functional</span>
-                        <span class="tag accent">Agile · Scrum</span>
-                        <span class="tag accent">8,000 wpm</span>
-                    </div>
-                    <div style="margin-top:0.8rem;">
-                        <span class="seeking">Open to full‑time · part‑time · internships</span>
-                    </div>
-                `,
-                exp: `
-                    <h2>Experience</h2>
-                    <div class="exp-item">
-                        <div class="exp-header">
-                            <span class="role">Co‑founder &amp; Product Lead</span>
-                            <span class="date">Mar 2023 – Present</span>
-                        </div>
-                        <div class="org">Flashnight Studios · GameDev</div>
-                        <ul class="bullets">
-                            <li>Led UI/UX and playtesting loops</li>
-                            <li>Integrated a CRM to segment players and track KPIs, boosting repeat sessions</li>
-                            <li>Orchestrated a cross‑functional team using Agile sprints and task boards</li>
-                            <li>Owned narrative design and contributed to front‑end code</li>
-                        </ul>
-                    </div>
-                    <div class="exp-item">
-                        <div class="exp-header">
-                            <span class="role">Community Manager &amp; Ad Sales</span>
-                            <span class="date">Current</span>
-                        </div>
-                        <div class="org">Dubai Youth Community · 5k+ Telegram</div>
-                        <ul class="bullets">
-                            <li>Grew and managed a 5,000‑member community with consistent engagement</li>
-                            <li>Closed ad partnerships with local businesses</li>
-                            <li>Built Telegram bots for ticket reservations and automated scheduling, cutting manual work by ~80%</li>
-                        </ul>
-                    </div>
-                    <div class="exp-item">
-                        <div class="exp-header">
-                            <span class="role">E‑commerce Operations</span>
-                            <span class="date">Mar 2021 – Aug 2025</span>
-                        </div>
-                        <div class="org">Freelance · Ozon, eBay, Avito</div>
-                        <ul class="bullets">
-                            <li>Managed listings, inventory, and pricing across 3 platforms simultaneously</li>
-                            <li>Maintained high seller ratings through diligent order tracking and customer care</li>
-                            <li>Analyzed sales data to spot trends and optimize assortment</li>
-                        </ul>
-                    </div>
-                    <div class="exp-item">
-                        <div class="exp-header">
-                            <span class="role">Business Analytics Assistant</span>
-                            <span class="date">May – Jul 2024</span>
-                        </div>
-                        <div class="org">University of Europe for Applied Sciences</div>
-                        <ul class="bullets">
-                            <li>Cleaned and structured student feedback data across multiple service categories</li>
-                            <li>Built interactive Excel &amp; Power BI dashboards to visualize KPIs and satisfaction</li>
-                            <li>Presented data‑driven recommendations that were adopted for curriculum improvements</li>
-                        </ul>
-                    </div>
-                    <div class="exp-item">
-                        <div class="exp-header">
-                            <span class="role">School President &amp; Student Council Head</span>
-                            <span class="date">Sep 2021 – Jul 2024</span>
-                        </div>
-                        <div class="org">Secondary School</div>
-                        <ul class="bullets">
-                            <li>Led council operations, organized events and charity drives, and served as the main liaison between students and administration</li>
-                        </ul>
-                    </div>
-                `,
-                edu: `
-                    <h2>Education</h2>
-                    <div class="edu-grid">
-                        <div class="edu-block">
-                            <p><strong>BSc Digital Business &amp; Data Science</strong></p>
-                            <p class="meta">University of Europe for Applied Sciences · Dubai, UAE</p>
-                            <div class="tags">
-                                <span class="tag">2024 – 2027</span>
-                                <span class="tag">GPA 3.1 / 4.0</span>
-                            </div>
-                        </div>
-                        <div class="edu-block">
-                            <p style="font-size:0.7rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:#3D6B7A; margin-bottom:0.3rem;">Coursework</p>
-                            <span class="tag">Digital Transformation</span>
-                            <span class="tag">Big Data</span>
-                            <span class="tag">Marketing &amp; Sales</span>
-                            <span class="tag">CRM</span>
-                            <span class="tag">Financial Accounting</span>
-                            <span class="tag">IT Platforms</span>
-                            <span class="tag">Agile PM</span>
-                            <span class="tag">Frontend</span>
-                            <span class="tag">IT Security</span>
-                            <span class="tag">AI</span>
-                            <span class="tag">Programming</span>
-                            <span class="tag">Quant &amp; Qual Methods</span>
-                        </div>
-                    </div>
-                `,
-                projects: `
-                    <h2>Projects</h2>
-                    <div class="project-item">
-                        <div class="project-header">
-                            <strong>Interactive CV / Resume</strong>
-                            <span class="stack">HTML · CSS · JavaScript</span>
-                        </div>
-                        Designed and developed a fully responsive, bilingual (EN/RU) CV with a clean, recruiter-optimized layout that adapts to print and screen. Implemented dynamic language switching and intersection-based reveal animations.
-                    </div>
-                    <div class="project-item">
-                        <div class="project-header">
-                            <strong>Telegram Ticket Reservation Bot</strong>
-                            <span class="stack">Python · Bot API · SQLite</span>
-                        </div>
-                        End‑to‑end chatbot for event ticket reservations: users pick events, choose seats, get confirmations. Admin panel for capacity management and waitlist notifications. Reduced manual ticket handling to zero.
-                    </div>
-                    <div class="project-item">
-                        <div class="project-header">
-                            <strong>Automated Content Scheduler</strong>
-                            <span class="stack">Python · Telegram Bot API</span>
-                        </div>
-                        Bot that automates event announcements for a 5,000‑member channel. Eliminated manual posting and cut recurring admin work by ~80%.
-                    </div>
-                    <div class="project-item">
-                        <div class="project-header">
-                            <strong>Customer Satisfaction BI Dashboard</strong>
-                            <span class="stack">Power BI · Excel · Power Query</span>
-                        </div>
-                        End‑to‑end BI pipeline: collected survey data, cleaned in Power Query, built an interactive dashboard tracking NPS and satisfaction drivers. Identified 2 underperforming areas, recommendations adopted.
-                    </div>
-                    <div class="project-item">
-                        <div class="project-header">
-                            <strong>Sales Performance &amp; Assortment Analysis</strong>
-                            <span class="stack">SQL · PostgreSQL · Python · pandas</span>
-                        </div>
-                        Analyzed 12 months of transaction data to model seasonal demand and SKU performance. Delivered a report with assortment optimization recommendations and projected revenue impact.
-                    </div>
-                    <div class="project-item">
-                        <div class="project-header">
-                            <strong>E‑commerce Price Monitoring Script</strong>
-                            <span class="stack">Python · web scraping · pandas</span>
-                        </div>
-                        Built a Python script to monitor competitor pricing across marketplaces, aggregating data into structured reports. Automated a manual process, saving several hours per week.
-                    </div>
-                `,
-                contact: `
-                    <h2>Get in touch</h2>
-                    <div class="action-row">
-                        <a href="mailto:valyanovvva@gmail.com" class="btn">Email me</a>
-                        <button onclick="togglePopup()" class="btn ghost">Show contacts</button>
-                    </div>
-                    <div class="contact-popup" id="contactPopup">
-                        <p><strong>Phone</strong> &nbsp; +971 56 229 1034</p>
-                        <p><strong>Email</strong> &nbsp; <a href="mailto:valyanovvva@gmail.com">valyanovvva@gmail.com</a></p>
-                        <p><strong>Location</strong> &nbsp; Dubai, UAE</p>
-                        <button onclick="togglePopup()" class="btn secondary" style="margin-top:0.6rem;">Close</button>
-                    </div>
-                `
+                nav: { about: 'About', education: 'Education', skills: 'Skills', experience: 'Experience', projects: 'Projects',
+                    contact: 'Contact' },
+                heroName: 'Sofiia <span>Valyanova</span>',
+                heroTitle: 'BSc Digital Business & Data Science',
+                heroDesc: 'Building smart systems, automating workflows, and turning data into decisions.',
+                aboutTitle: 'About Me',
+                aboutText: 'I am a Digital Business & Data Science student based in Dubai. I combine analytical thinking with practical execution, using Python, SQL, and AI tools to automate processes and build smart solutions. I thrive on complexity, learn fast, and never settle for boring. I also enjoy game development and testing. I\'m eager to apply my analytical toolkit and cross-functional communication skills to drive efficiency and deliver tangible results for a growth-focused team.',
+                interestsTitle: 'Interests & Core Traits',
+                interests: ['Strategic games', 'Hackathons & side builds', 'Sci‑Fi & behavioral psychology',
+                    'Travel & urban exploration', 'Debate & public speaking'
+                ],
+                traits: ['Innovative', 'Adaptable', 'Curious', 'Strategic', 'Persuasive'],
+                eduTitle: 'Education',
+                eduProgram: 'Bachelor in Digital Business & Data Science',
+                eduUniv: 'University of Europe for Applied Science | UAE',
+                eduYears: '2024 – 2027',
+                eduGPA: 'GPA 3.1 / 4.0',
+                eduCourseworkTitle: 'Relevant coursework:',
+                courses: ['Digital Transformation', 'Big Data', 'Marketing & Sales', 'CRM', 'Financial Accounting',
+                    'IT Platforms', 'Agile PM', 'Frontend', 'IT Security', 'AI Programming',
+                    'Quantitative & Qualitative Methods'
+                ],
+                skillsTitle: 'Technical Skills',
+                skillsLists: {
+                    ml: ['Python (pandas, numpy)', 'NLP', 'Computer Vision', 'Model Tuning', 'Hugging Face'],
+                    data: ['SQL (PostgreSQL, Azure)', 'Power BI / Tableau', 'Excel (Power Query, VBA)',
+                        'ETL / Data Pipelines', 'Data Analysis & Visualization'
+                    ],
+                    web: ['Java / HTML / CSS', 'Power Automate', 'AI-assisted (Cursor)', 'Microsoft 365 / Teams'],
+                    devops: ['Git / GitHub', 'Azure (Data Factory)', 'CI/CD', 'Docker (basics)'],
+                    soft: ['Agile · SCRUM', 'Product Thinking', 'Communication', 'Fast Learning', 'Research',
+                        'Problem Solving'
+                    ]
+                },
+                experience: [
+                    '<strong>E-commerce Ops</strong> – <em>Ozon, eBay, Avito</em><br>Product listing, tracking, customer satisfaction.',
+                    '<strong>Community Manager</strong> – <em>Dubai Youth Community (5k+ TG)</em><br>Content, events, ad sales.',
+                    '<strong>Business Analyst</strong> – <em>UEAS</em><br>Dashboards in Power BI & Excel, insights for performance.',
+                    '<strong>Co-founder</strong> – <em>Flashnight Studios</em><br>UI/UX, playtesting, CRM, narrative.',
+                    '<strong>School President</strong> – <em>2021–2024</em><br>Events, charity, student representation.'
+                ],
+                projects: [
+                    { title: 'Customer Feedback Dashboard', desc: 'Power BI dashboard analyzing survey data to identify key satisfaction drivers for a university project.',
+                        tags: ['Power BI', 'Excel', 'Data Viz'] },
+                    { title: 'Sales Performance Report', desc: 'SQL + Python project analyzing sales data, finding trends, and proposing assortment optimization.',
+                        tags: ['SQL', 'Python', 'Pandas'] },
+                    { title: 'Telegram Community Bot', desc: 'Automated bot for Dubai Youth Community (5k+ members) – event announcements and engagement tracking.',
+                        tags: ['Python', 'Telegram API', 'Automation'] },
+                    { title: 'Personal Portfolio Site', desc: 'This very site – built from scratch with HTML, CSS, and JavaScript, featuring glassmorphism and interactive elements.',
+                        tags: ['HTML/CSS', 'JavaScript', 'UI/UX'] }
+                ],
+                languages: [
+                    { name: 'Russian', level: 'native' },
+                    { name: 'English', level: 'fluent (C1+)' },
+                    { name: 'Tatar', level: 'basic' }
+                ],
+                langTitle: 'Languages',
+                expTitle: 'Experience',
+                contactTitle: "Let's connect",
+                contactDesc: 'I am open to freelance, part-time, or full-time roles in AI, data, or automation, as well as internships in development and ML.',
+                footerCopy: '2026 Sofiia Valyanova · Built with <i class="fas fa-coffee"></i> and <i class="fas fa-heart" style="color:#E94560;"></i>',
+                secretText: 'now lets make some money'
             },
             ru: {
-                profile: `
-                    <div class="profile-name">София Валянова</div>
-                    <div class="profile-title">Бакалавр цифрового бизнеса и науки о данных</div>
-                    <hr class="divider" />
-                    <div class="contact-line"><span class="label">Локация</span> Дубай, ОАЭ</div>
-                    <div class="contact-line"><span class="label">Телефон</span> +971 56 229 1034</div>
-                    <div class="contact-line"><span class="label">Email</span> <a href="mailto:valyanovvva@gmail.com">valyanovvva@gmail.com</a></div>
-                    <div class="contact-line"><span class="label">Виза</span> Студенческая · ОАЭ</div>
-                    <hr class="divider" />
-                    <div class="skill-group">
-                        <span class="label">Ключевые черты</span>
-                        <span class="tag accent">Инновационность</span>
-                        <span class="tag accent">Адаптивность</span>
-                        <span class="tag accent">Любознательность</span>
-                        <span class="tag accent">Стратегичность</span>
-                        <span class="tag accent">Убедительность</span>
-                    </div>
-                    <div class="skill-group">
-                        <span class="label">Языки</span>
-                        <div class="lang-item"><span>Английский</span><span class="level">C1+ · Свободно</span></div>
-                        <div class="lang-item"><span>Русский</span><span class="level">Родной</span></div>
-                        <div class="lang-item"><span>Татарский</span><span class="level">Базовый · Происхождение</span></div>
-                    </div>
-                    <div class="skill-group">
-                        <span class="label">Коротко</span>
-                        <div style="font-size:0.82rem; color:#1E2B38; line-height:1.6;">
-                            Родилась в России · Резидент ОАЭ<br>
-                            Татарские корни · ЕС (Болгария)
-                        </div>
-                    </div>
-                    <div class="skill-group">
-                        <span class="label">Интересы</span>
-                        <div class="interests-grid" id="interests-container"></div>
-                    </div>
-                `,
-                skills_side: `
-                    <h2>Экспертиза</h2>
-                    <div class="skill-group">
-                        <span class="label">Данные и аналитика</span>
-                        <span class="tag tech">Python · pandas</span>
-                        <span class="tag tech">SQL · PostgreSQL</span>
-                        <span class="tag tech">Power BI</span>
-                        <span class="tag tech">Визуализация</span>
-                        <span class="tag tech">Excel · VBA</span>
-                        <span class="tag tech">MS Office</span>
-                        <span class="tag tech">ETL</span>
-                    </div>
-                    <div class="skill-group">
-                        <span class="label">Разработка и автоматизация</span>
-                        <span class="tag tech">Python скрипты</span>
-                        <span class="tag tech">Node.js</span>
-                        <span class="tag tech">AI/LLM интеграция (OpenAI)</span>
-                        <span class="tag tech">Telegram Bot API</span>
-                        <span class="tag tech">HTML / CSS / Java</span>
-                        <span class="tag tech">Azure · Data Factory</span>
-                        <span class="tag tech">Git</span>
-                        <span class="tag tech">Power Automate</span>
-                    </div>
-                    <div class="skill-group">
-                        <span class="label">Бизнес и софт-скиллы</span>
-                        <span class="tag">Agile · Scrum</span>
-                        <span class="tag">CRM</span>
-                        <span class="tag">Сбор требований</span>
-                        <span class="tag">Коммуникация</span>
-                        <span class="tag">Оптимизация процессов</span>
-                        <span class="tag">Самоорганизация</span>
-                    </div>
-                `,
-                about: `
-                    <h2>Обо мне</h2>
-                    <p class="profile-text">
-                        Я студентка направления «Цифровой бизнес и наука о данных» в Дубае. Превращаю данные и обратную связь от клиентов в оптимизированные процессы и измеримые результаты. Имею практический опыт в управлении сообществами, операциях на маркетплейсах и разработке продуктов — это помогает мне связывать бизнес-стратегию с технической реализацией. Готова применить свои аналитические навыки и коммуникативные способности, чтобы повысить эффективность и приносить реальную пользу растущей команде.
-                    </p>
-                    <div class="flex-wrap" style="margin-top:0.4rem;">
-                        <span class="tag accent">Data-driven</span>
-                        <span class="tag accent">Автоматизация</span>
-                        <span class="tag accent">BI и дашборды</span>
-                        <span class="tag accent">Кросс-функциональность</span>
-                        <span class="tag accent">Agile · Scrum</span>
-                        <span class="tag accent">8 000 зн/мин</span>
-                    </div>
-                    <div style="margin-top:0.8rem;">
-                        <span class="seeking">Открыта к полной, частичной занятости и стажировкам</span>
-                    </div>
-                `,
-                exp: `
-                    <h2>Опыт</h2>
-                    <div class="exp-item">
-                        <div class="exp-header">
-                            <span class="role">Сооснователь и продакт-лид</span>
-                            <span class="date">Мар 2023 – наст. вр.</span>
-                        </div>
-                        <div class="org">Flashnight Studios · GameDev</div>
-                        <ul class="bullets">
-                            <li>Руководила UI/UX и плейтестингом</li>
-                            <li>Внедрила CRM для сегментации игроков и отслеживания KPI, повысив повторные сессии</li>
-                            <li>Координировала кросс‑функциональную команду через Agile‑спринты</li>
-                            <li>Отвечала за нарратив и участвовала во фронтенд‑разработке</li>
-                        </ul>
-                    </div>
-                    <div class="exp-item">
-                        <div class="exp-header">
-                            <span class="role">Комьюнити-менеджер и реклама</span>
-                            <span class="date">Текущий</span>
-                        </div>
-                        <div class="org">Dubai Youth Community · 5k+ Telegram</div>
-                        <ul class="bullets">
-                            <li>Развивала сообщество на 5 000 человек с высокой вовлечённостью</li>
-                            <li>Заключала рекламные партнёрства с локальным бизнесом</li>
-                            <li>Разработала ботов для бронирования и автоматического планирования, сократив ручную работу на ~80%</li>
-                        </ul>
-                    </div>
-                    <div class="exp-item">
-                        <div class="exp-header">
-                            <span class="role">Операции на маркетплейсах</span>
-                            <span class="date">Мар 2021 – Авг 2025</span>
-                        </div>
-                        <div class="org">Фриланс · Ozon, eBay, Avito</div>
-                        <ul class="bullets">
-                            <li>Управляла листингами, остатками и ценами на 3 платформах одновременно</li>
-                            <li>Поддерживала высокий рейтинг продавца через качественный сервис</li>
-                            <li>Анализировала продажи для выявления трендов и оптимизации ассортимента</li>
-                        </ul>
-                    </div>
-                    <div class="exp-item">
-                        <div class="exp-header">
-                            <span class="role">Бизнес-аналитика</span>
-                            <span class="date">Май – Июл 2024</span>
-                        </div>
-                        <div class="org">University of Europe for Applied Sciences</div>
-                        <ul class="bullets">
-                            <li>Собирала и структурировала данные обратной связи студентов</li>
-                            <li>Строила дашборды в Excel и Power BI для визуализации KPI</li>
-                            <li>Представила рекомендации в рамках учебной программы</li>
-                        </ul>
-                    </div>
-                    <div class="exp-item">
-                        <div class="exp-header">
-                            <span class="role">Президент школы и глава совета</span>
-                            <span class="date">Сен 2021 – Июл 2024</span>
-                        </div>
-                        <div class="org">Средняя школа</div>
-                        <ul class="bullets">
-                            <li>Руководила советом, организовывала мероприятия и благотворительные акции, была связующим звеном между учениками и администрацией</li>
-                        </ul>
-                    </div>
-                `,
-                edu: `
-                    <h2>Образование</h2>
-                    <div class="edu-grid">
-                        <div class="edu-block">
-                            <p><strong>Бакалавр цифрового бизнеса и науки о данных</strong></p>
-                            <p class="meta">University of Europe for Applied Sciences · Дубай, ОАЭ</p>
-                            <div class="tags">
-                                <span class="tag">2024 – 2027</span>
-                                <span class="tag">GPA 3.1 / 4.0</span>
-                            </div>
-                        </div>
-                        <div class="edu-block">
-                            <p style="font-size:0.7rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:#3D6B7A; margin-bottom:0.3rem;">Ключевые курсы</p>
-                            <span class="tag">Цифровая трансформация</span>
-                            <span class="tag">Большие данные</span>
-                            <span class="tag">Маркетинг и продажи</span>
-                            <span class="tag">CRM</span>
-                            <span class="tag">Финансовый учёт</span>
-                            <span class="tag">IT-платформы</span>
-                            <span class="tag">Agile PM</span>
-                            <span class="tag">Фронтенд</span>
-                            <span class="tag">IT-безопасность</span>
-                            <span class="tag">ИИ</span>
-                            <span class="tag">Программирование</span>
-                            <span class="tag">Количественные и качественные методы</span>
-                        </div>
-                    </div>
-                `,
-                projects: `
-                    <h2>Проекты</h2>
-                    <div class="project-item">
-                        <div class="project-header">
-                            <strong>Интерактивное CV / Резюме</strong>
-                            <span class="stack">HTML · CSS · JavaScript</span>
-                        </div>
-                        Разработала полностью адаптивное, двуязычное (EN/RU) резюме с чистым, оптимизированным для рекрутеров дизайном, который адаптируется под печать и экран. Реализовала динамическое переключение языков и анимацию при появлении.
-                    </div>
-                    <div class="project-item">
-                        <div class="project-header">
-                            <strong>Telegram-бот для бронирования билетов</strong>
-                            <span class="stack">Python · Bot API · SQLite</span>
-                        </div>
-                        Чат‑бот для бронирования билетов на мероприятия: выбор событий, мест, подтверждение. Админ‑панель для управления вместимостью и уведомлениями. Полностью исключила ручную обработку.
-                    </div>
-                    <div class="project-item">
-                        <div class="project-header">
-                            <strong>Бот для автоматического планирования</strong>
-                            <span class="stack">Python · Telegram Bot API</span>
-                        </div>
-                        Бот для автоматической публикации анонсов в канале на 5 000 подписчиков. Исключила ручной постинг, сократив нагрузку на ~80%.
-                    </div>
-                    <div class="project-item">
-                        <div class="project-header">
-                            <strong>BI-дашборд удовлетворённости клиентов</strong>
-                            <span class="stack">Power BI · Excel · Power Query</span>
-                        </div>
-                        Сквозной BI‑пайплайн: сбор данных, очистка в Power Query, интерактивный дашборд с NPS и драйверами удовлетворённости. Выявила 2 зоны для улучшения — рекомендации приняты.
-                    </div>
-                    <div class="project-item">
-                        <div class="project-header">
-                            <strong>Анализ продаж и ассортимента</strong>
-                            <span class="stack">SQL · PostgreSQL · Python · pandas</span>
-                        </div>
-                        Проанализировала 12 месяцев транзакций для моделирования сезонного спроса и эффективности SKU. Подготовила отчёт с рекомендациями по оптимизации ассортимента и прогнозом влияния на выручку.
-                    </div>
-                    <div class="project-item">
-                        <div class="project-header">
-                            <strong>Скрипт мониторинга цен</strong>
-                            <span class="stack">Python · веб-скрейпинг · pandas</span>
-                        </div>
-                        Разработала скрипт для отслеживания цен конкурентов на маркетплейсах с агрегацией данных в отчёты. Автоматизировала ручной процесс, сэкономив несколько часов в неделю.
-                    </div>
-                `,
-                contact: `
-                    <h2>Контакты</h2>
-                    <div class="action-row">
-                        <a href="mailto:valyanovvva@gmail.com" class="btn">Написать</a>
-                        <button onclick="togglePopup()" class="btn ghost">Показать контакты</button>
-                    </div>
-                    <div class="contact-popup" id="contactPopup">
-                        <p><strong>Телефон</strong> &nbsp; +971 56 229 1034</p>
-                        <p><strong>Email</strong> &nbsp; <a href="mailto:valyanovvva@gmail.com">valyanovvva@gmail.com</a></p>
-                        <p><strong>Локация</strong> &nbsp; Дубай, ОАЭ</p>
-                        <button onclick="togglePopup()" class="btn secondary" style="margin-top:0.6rem;">Закрыть</button>
-                    </div>
-                `
+                nav: { about: 'Обо мне', education: 'Образование', skills: 'Навыки', experience: 'Опыт', projects: 'Проекты',
+                    contact: 'Контакты' },
+                heroName: 'София <span>Валянова</span>',
+                heroTitle: 'Бакалавр цифрового бизнеса и науки о данных',
+                heroDesc: 'Создаю умные системы, автоматизирую процессы и превращаю данные в решения.',
+                aboutTitle: 'Обо мне',
+                aboutText: 'Я студентка направления «Цифровой бизнес и наука о данных» в Дубае. Сочетаю аналитическое мышление с практической реализацией, использую Python, SQL и ИИ-инструменты для автоматизации и построения решений. Люблю сложные задачи, быстро учусь и не терплю скуки. Также увлекаюсь геймдевом и тестированием. Стремлюсь применять свои аналитические навыки и умение работать в команде для повышения эффективности и достижения измеримых результатов.',
+                interestsTitle: 'Интересы и ключевые черты',
+                interests: ['Стратегические игры', 'Хакатоны и пет-проекты', 'Научная фантастика и поведенческая психология',
+                    'Путешествия и исследование городов', 'Дебаты и публичные выступления'
+                ],
+                traits: ['Инновационность', 'Адаптивность', 'Любознательность', 'Стратегичность', 'Убедительность'],
+                eduTitle: 'Образование',
+                eduProgram: 'Бакалавр цифрового бизнеса и науки о данных',
+                eduUniv: 'University of Europe for Applied Science | ОАЭ',
+                eduYears: '2024 – 2027',
+                eduGPA: 'Средний балл 3.1 / 4.0',
+                eduCourseworkTitle: 'Ключевые курсы:',
+                courses: ['Цифровая трансформация', 'Большие данные', 'Маркетинг и продажи', 'CRM', 'Финансовый учёт',
+                    'IT-платформы', 'Agile PM', 'Фронтенд', 'IT-безопасность', 'Программирование ИИ',
+                    'Количественные и качественные методы'
+                ],
+                skillsTitle: 'Технические навыки',
+                skillsLists: {
+                    ml: ['Python (pandas, numpy)', 'NLP', 'Компьютерное зрение', 'Настройка моделей'],
+                    data: ['SQL (PostgreSQL, Azure)', 'Power BI / Tableau', 'Excel (Power Query, VBA)',
+                        'ETL / Data Pipelines', 'Анализ и визуализация данных', 'MS Office'
+                    ],
+                    web: ['Java / HTML / CSS', 'Power Automate', 'AI-assisted (Cursor)', 'Microsoft 365 / Teams'],
+                    devops: ['Git / GitHub', 'Azure (Data Factory)', 'CI/CD', 'Docker (основы)'],
+                    soft: ['Agile · SCRUM', 'Продуктовое мышление', 'Коммуникация', 'Быстрое обучение', 'Исследования',
+                        'Решение проблем'
+                    ]
+                },
+                experience: [
+                    '<strong>Операции на маркетплейсах</strong> – <em>Ozon, eBay, Avito</em><br>Управление товарами, отслеживание заказов, работа с клиентами.',
+                    '<strong>Управление сообществом</strong> – <em>Dubai Youth Community (5k+ в TG)</em><br>Контент, мероприятия, продажа рекламы.',
+                    '<strong>Бизнес-аналитика</strong> – <em>UEAS</em><br>Дашборды в Power BI и Excel, инсайты для улучшения показателей.',
+                    '<strong>Сооснователь</strong> – <em>Flashnight Studios</em><br>UI/UX, тестирование, CRM, нарратив.',
+                    '<strong>Президент школы</strong> – <em>2021–2024</em><br>Мероприятия, благотворительность, представление студентов.'
+                ],
+                projects: [
+                    { title: 'Дашборд обратной связи клиентов', desc: 'Дашборд в Power BI для анализа данных опросов и выявления ключевых драйверов удовлетворённости в рамках университетского проекта.',
+                        tags: ['Power BI', 'Excel', 'Визуализация'] },
+                    { title: 'Отчёт по эффективности продаж', desc: 'Проект на SQL + Python для анализа данных продаж, поиска трендов и оптимизации ассортимента.',
+                        tags: ['SQL', 'Python', 'Pandas'] },
+                    { title: 'Телеграм-бот для сообщества', desc: 'Автоматизированный бот для Dubai Youth Community (5k+ участников) – анонсы мероприятий и отслеживание вовлечённости.',
+                        tags: ['Python', 'Telegram API', 'Автоматизация'] },
+                    { title: 'Персональный сайт-портфолио', desc: 'Этот сайт – создан с нуля на HTML, CSS и JavaScript с эффектом стекла и интерактивными элементами.',
+                        tags: ['HTML/CSS', 'JavaScript', 'UI/UX'] }
+                ],
+                languages: [
+                    { name: 'Русский', level: 'родной' },
+                    { name: 'Английский', level: 'свободно (C1+)' },
+                    { name: 'Татарский', level: 'базовый' }
+                ],
+                langTitle: 'Языки',
+                expTitle: 'Опыт',
+                contactTitle: 'Свяжитесь со мной',
+                contactDesc: 'Открыта для фриланса, частичной или полной занятости в сфере ИИ, данных и автоматизации, а также для стажировок в разработке и ML.',
+                footerCopy: '2026 София Валянова · Сделано с <i class="fas fa-coffee"></i> и <i class="fas fa-heart" style="color:#E94560;"></i>',
+                secretText: 'теперь давай заработаем денег'
             }
         };
 
-        // ── Render ──
         let currentLang = 'en';
 
-        function render(lang) {
+        function setLanguage(lang) {
             currentLang = lang;
-            const data = content[lang];
-            const interests = interestsData[lang];
+            document.documentElement.lang = lang;
+            document.body.setAttribute('lang', lang);
+            const t = translations[lang];
 
-            document.getElementById('card-profile').innerHTML = data.profile;
-            document.getElementById('card-skills-side').innerHTML = data.skills_side;
-            document.getElementById('card-about').innerHTML = data.about;
-            document.getElementById('card-exp').innerHTML = data.exp;
-            document.getElementById('card-edu').innerHTML = data.edu;
-            document.getElementById('card-projects').innerHTML = data.projects;
-            document.getElementById('card-contact').innerHTML = data.contact;
+            document.querySelectorAll('.nav-links a[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (t.nav[key]) el.textContent = t.nav[key];
+            });
 
-            const container = document.getElementById('interests-container');
-            if (container) {
-                container.innerHTML = interests.map(i => `<span class="tag interest">${i}</span>`).join('');
-            }
+            document.getElementById('heroName').innerHTML = t.heroName;
+            document.getElementById('heroTitle').textContent = t.heroTitle;
+            document.getElementById('heroDesc').textContent = t.heroDesc;
+            document.getElementById('aboutTitle').textContent = t.aboutTitle;
+            document.getElementById('aboutText').textContent = t.aboutText;
+            document.getElementById('interestsTitle').textContent = t.interestsTitle;
 
-            document.getElementById('langToggle').textContent = lang === 'en' ? 'Русский' : 'English';
+            const interestsContainer = document.querySelector('.interests-grid');
+            interestsContainer.innerHTML = t.interests.map(i => `<span class="tag">${i}</span>`).join('');
+            const traitsContainer = document.querySelector('.traits-grid');
+            traitsContainer.innerHTML = t.traits.map(i => `<span class="tag">${i}</span>`).join('');
 
-            document.querySelectorAll('.card, .card-side').forEach(el => el.classList.remove('visible'));
-            setTimeout(() => {
-                document.querySelectorAll('.card, .card-side').forEach(el => {
-                    const rect = el.getBoundingClientRect();
-                    if (rect.top < window.innerHeight + 80) el.classList.add('visible');
-                });
-                initObserver();
-            }, 60);
+            document.getElementById('eduTitle').textContent = t.eduTitle;
+            document.getElementById('eduProgram').textContent = t.eduProgram;
+            document.getElementById('eduUniv').textContent = t.eduUniv;
+            document.getElementById('eduYears').textContent = t.eduYears;
+            document.getElementById('eduGPA').textContent = t.eduGPA;
+            document.getElementById('eduCourseworkTitle').textContent = t.eduCourseworkTitle;
+            const coursesContainer = document.getElementById('coursesContainer');
+            coursesContainer.innerHTML = t.courses.map(c => `<span class="tag">${c}</span>`).join('');
+
+            document.getElementById('skillsTitle').textContent = t.skillsTitle;
+
+            const modalMap = {
+                'modal-ml': 'ml',
+                'modal-data': 'data',
+                'modal-web': 'web',
+                'modal-devops': 'devops',
+                'modal-soft': 'soft'
+            };
+            Object.keys(modalMap).forEach(id => {
+                const modal = document.getElementById(id);
+                if (modal) {
+                    const list = modal.querySelector('ul');
+                    if (list) {
+                        const items = t.skillsLists[modalMap[id]];
+                        list.innerHTML = items.map(item => `<li>${item}</li>`).join('');
+                    }
+                }
+            });
+
+            document.getElementById('expTitle').textContent = t.expTitle;
+            const timeline = document.querySelector('.timeline');
+            timeline.innerHTML = t.experience.map(html => `<div class="timeline-item">${html}</div>`).join('');
+
+            const track = document.getElementById('projectTrack');
+            const projectCards = track.querySelectorAll('.project-card');
+            t.projects.forEach((proj, index) => {
+                if (projectCards[index]) {
+                    const card = projectCards[index];
+                    card.querySelector('h4').textContent = proj.title;
+                    card.querySelector('p').textContent = proj.desc;
+                    const tagsContainer = card.querySelector('.project-tags');
+                    tagsContainer.innerHTML = proj.tags.map(tag => `<span>${tag}</span>`).join('');
+                }
+            });
+
+            document.getElementById('langTitle').textContent = t.langTitle;
+            const langsContainer = document.querySelector('.langs');
+            langsContainer.innerHTML = t.languages.map(l => `<span class="lang-item"><strong>${l.name}</strong> – ${l.level}</span>`).join('');
+
+            document.getElementById('contactTitle').textContent = t.contactTitle;
+            document.getElementById('contactDesc').textContent = t.contactDesc;
+            document.getElementById('footerCopy').innerHTML = t.footerCopy;
+            document.querySelector('#secretPopup p').textContent = t.secretText;
         }
 
         document.getElementById('langToggle').addEventListener('click', () => {
-            render(currentLang === 'en' ? 'ru' : 'en');
+            const newLang = currentLang === 'en' ? 'ru' : 'en';
+            setLanguage(newLang);
         });
 
-        let observer;
+        const modalTriggers = document.querySelectorAll('[data-modal]');
+        const modals = document.querySelectorAll('.modal');
+        const closeBtns = document.querySelectorAll('[data-close]');
 
-        function initObserver() {
-            if (observer) observer.disconnect();
-            observer = new IntersectionObserver((entries) => {
-                entries.forEach(e => {
-                    if (e.isIntersecting) e.target.classList.add('visible');
-                });
-            }, { threshold: 0.08 });
-            document.querySelectorAll('.card, .card-side').forEach(el => observer.observe(el));
+        modalTriggers.forEach(trigger => {
+            trigger.addEventListener('click', () => {
+                const id = trigger.dataset.modal;
+                document.getElementById('modal-' + id).classList.add('active');
+            });
+        });
+        closeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                btn.closest('.modal').classList.remove('active');
+            });
+        });
+        modals.forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) modal.classList.remove('active');
+            });
+        });
+
+        const vibeBtn = document.getElementById('vibeBtn');
+        const vibeOverlay = document.getElementById('vibeOverlay');
+        const vibeAudio = document.getElementById('vibeAudio');
+        let vibeActive = false;
+
+        vibeBtn.addEventListener('click', () => {
+            if (!vibeActive) {
+                vibeActive = true;
+                vibeOverlay.classList.add('active');
+                vibeAudio.play().catch(() => console.log('Autoplay blocked'));
+                vibeBtn.textContent = 'Vibe ON';
+            } else {
+                vibeActive = false;
+                vibeOverlay.classList.remove('active');
+                vibeAudio.pause();
+                vibeAudio.currentTime = 0;
+                vibeBtn.textContent = 'Vibe';
+            }
+        });
+
+        const track = document.getElementById('projectTrack');
+        const dotsContainer = document.getElementById('projectDots');
+        let currentSlide = 0;
+        const totalSlides = document.querySelectorAll('.project-card').length;
+        let autoSlideInterval = null;
+        let startX = 0;
+        let isDragging = false;
+
+        function updateCarousel() {
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            document.querySelectorAll('.projects-dots span').forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentSlide);
+            });
         }
 
-        function togglePopup() {
-            const p = document.getElementById('contactPopup');
-            if (p) p.style.display = p.style.display === 'block' ? 'none' : 'block';
+        function goToSlide(index) {
+            if (index < 0) index = totalSlides - 1;
+            if (index >= totalSlides) index = 0;
+            currentSlide = index;
+            updateCarousel();
         }
 
-        window.togglePopup = togglePopup;
+        function nextSlide() { goToSlide(currentSlide + 1); }
 
-        // ── Initial render ──
-        render('en');
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('span');
+            dot.classList.toggle('active', i === 0);
+            dot.addEventListener('click', () => { clearInterval(autoSlideInterval);
+                goToSlide(i);
+                startAutoSlide(); });
+            dotsContainer.appendChild(dot);
+        }
+
+        function startAutoSlide() {
+            if (autoSlideInterval) clearInterval(autoSlideInterval);
+            autoSlideInterval = setInterval(nextSlide, 5000);
+        }
+        startAutoSlide();
+
+        track.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            isDragging = true;
+            clearInterval(autoSlideInterval);
+        });
+        track.addEventListener('touchmove', (e) => { if (!isDragging) return; });
+        track.addEventListener('touchend', (e) => {
+            if (!isDragging) return;
+            isDragging = false;
+            const endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) goToSlide(currentSlide + 1);
+                else goToSlide(currentSlide - 1);
+            }
+            startAutoSlide();
+        });
+
+        let mouseDown = false;
+        let mouseStartX = 0;
+        track.addEventListener('mousedown', (e) => {
+            mouseDown = true;
+            mouseStartX = e.clientX;
+            clearInterval(autoSlideInterval);
+        });
+        track.addEventListener('mouseup', (e) => {
+            if (!mouseDown) return;
+            mouseDown = false;
+            const diff = mouseStartX - e.clientX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) goToSlide(currentSlide + 1);
+                else goToSlide(currentSlide - 1);
+            }
+            startAutoSlide();
+        });
+        track.addEventListener('mouseleave', () => {
+            if (mouseDown) { mouseDown = false;
+                startAutoSlide(); }
+        });
+
+        const secretTrigger = document.getElementById('secretTrigger');
+        const secretPopup = document.getElementById('secretPopup');
+        const secretOverlay = document.getElementById('secretOverlay');
+        const closeSecret = document.getElementById('closeSecret');
+
+        function showSecret() {
+            secretPopup.classList.add('show');
+            secretOverlay.classList.add('show');
+        }
+
+        function hideSecret() {
+            secretPopup.classList.remove('show');
+            secretOverlay.classList.remove('show');
+        }
+
+        secretTrigger.addEventListener('click', showSecret);
+        closeSecret.addEventListener('click', hideSecret);
+        secretOverlay.addEventListener('click', hideSecret);
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        setLanguage('en');
     </script>
-
 </body>
 </html>
