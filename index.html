@@ -1307,18 +1307,22 @@
 
         vibeBtn.addEventListener('click', () => {
             if (!vibeActive) {
-                vibeActive = true;
-                vibeOverlay.classList.add('active');
-                vibeAudio.play().catch(() => console.log('Autoplay blocked'));
-                vibeBtn.textContent = 'Vibe ON';
-            } else {
-                vibeActive = false;
-                vibeOverlay.classList.remove('active');
-                vibeAudio.pause();
-                vibeAudio.currentTime = 0;
-                vibeBtn.textContent = 'Vibe';
-            }
-        });
+        // Если песня уже доиграна, перематываем на начало
+            if (vibeAudio.currentTime === vibeAudio.duration || vibeAudio.paused) {
+            vibeAudio.currentTime = 0;
+        }
+        vibeActive = true;
+        vibeOverlay.classList.add('active');
+        vibeAudio.play().catch(() => console.log('Autoplay blocked'));
+        vibeBtn.textContent = 'Vibe ON';
+    } else {
+        vibeActive = false;
+        vibeOverlay.classList.remove('active');
+        vibeAudio.pause();
+        vibeAudio.currentTime = 0;
+        vibeBtn.textContent = 'Vibe';
+    }
+});
 
         const track = document.getElementById('projectTrack');
         const dotsContainer = document.getElementById('projectDots');
